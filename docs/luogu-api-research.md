@@ -194,3 +194,26 @@ fetch('/record/list?user={uid}&page=1',{headers:{'x-lentille-request':'content-o
 - 状态分布：CE 35 / UKE 11 / AC 800 / Unaccepted 1109（合计 1955 ✓）；
 - `language=25`（PyPy 3）过滤命中 2 条；
 - 跨页验证：page1 与 page2 首条 id 不同且无交集。
+
+
+## 10. 信封 `user` 字段（登录态判定）
+
+> 补充日期：2026-11-15。
+
+Lentille 信封顶层 `user` 字段类型为「用户对象 ｜ null」：
+
+- **登录**：`user` 为对象，必含正整数 `uid`（及 `name`、`avatar` 等）；
+- **游客**：`user` 为 `null`（或键缺失）。
+
+判定建议：`json.user ?? null === null` → 游客；否则校验 `Number.isInteger(u.uid) && u.uid > 0`，不满足按未登录兜底。
+
+两点注意：
+
+1. `record/list` 游客请求拿不到 JSON 信封（返回 HTML 壳，见 §4），故该判定只在成功解析信封后才有意义，属登录态的**第二层**判定；第一层是响应形态（非 JSON 即会话失效）；
+2. `template === "error"` 的 500 错误信封（如 uid 不存在）不含有效 `user`，属错误路径，勿与游客混淆。
+
+「游客 ⇒ `user: null`」目前标注 [源码推断]；可在任意免登录 lentille 页面（如 `/problem/list`）用隐身窗口对照验证：
+
+```
+fetch('/problem/list',{headers:{'x-lentille-request':'content-only'}}).then(r=>r.json()).then(j=>console.log(j.user))
+```
