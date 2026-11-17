@@ -7,8 +7,6 @@ import {
 } from "./contract";
 import { isObject, normalizeResult, parseSubmissionsPage } from "./parse"
 
-type UnknownRecord = Record<string, unknown>;
-
 type FetchSubmissionsOptions = {
   baseUrl?: string;
   knownMaxId?: number;
