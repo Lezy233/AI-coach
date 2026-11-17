@@ -67,11 +67,11 @@ function assertSuccessEnvelope(input: unknown): void {
 
   if (input.template === "error") {
     const data = isObject(input.data) ? input.data : null;
-    const message = 
+    const message =
       data !== null && typeof data.errorMessage === "string"
         ? data.errorMessage
         : "洛谷接口返回错误信封";
-    
+
     throw new Error(message);
   }
 
@@ -205,7 +205,7 @@ export async function fetchSubmissions(
 
   const baseUrl = options.baseUrl ?? window.location.origin;
   const knownMaxId = options.knownMaxId ?? 0;
-  
+
   const allSubmissions: Submission[] = [];
   let page = 1;
   let expectedMeta: PageMeta | undefined;
@@ -237,7 +237,7 @@ export async function fetchSubmissions(
 
     allSubmissions.push(...freshSubmissions);
 
-    const reachedKnownRecord = 
+    const reachedKnownRecord =
       submissions.some((submission) => submission.id <= knownMaxId);
 
     const totalPages = Math.ceil(meta.count / meta.perPage);
