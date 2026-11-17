@@ -5,7 +5,7 @@ import {
   LUOGU_RECORD_LIST_PATH,
   LUOGU_PAGE_DELAY_MS,
 } from "./contract";
-import { normalizeResult, parseSubmissionsPage } from "./parse"
+import { isObject, normalizeResult, parseSubmissionsPage } from "./parse"
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -19,14 +19,6 @@ type PageMeta = {
   count: number;
   perPage: number;
 };
-
-function isObject(value: unknown): value is UnknownRecord {
-	return (
-		typeof value === "object" &&
-		value !== null &&
-		!Array.isArray(value)
-	);
-}
 
 function isPositiveInteger(value: unknown): value is number {
   return (
@@ -153,7 +145,6 @@ async function fetchPage(
   baseUrl: string,
   signal?: AbortSignal,
 ): Promise<{
-  body: unknown;
   meta: PageMeta;
   submissions: Submission[];
 }> {
@@ -200,7 +191,7 @@ async function fetchPage(
     );
   }
 
-  return { body, meta, submissions };
+  return { meta, submissions };
 }
 
 export async function fetchSubmissions(

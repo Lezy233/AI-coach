@@ -6,7 +6,7 @@ import {
 
 type UnknownRecord = Record<string, unknown>;
 
-function isObject( value: unknown): value is UnknownRecord {
+export function isObject( value: unknown): value is UnknownRecord {
 	return (
 		typeof value === "object" &&
 		value !== null &&
@@ -100,7 +100,7 @@ function parseRecord(input: unknown): RawLuoguRecord {
 }
 
 function toSubmission(input: RawLuoguRecord): Submission {
-	const verdict = STATUS_TO_VERDICT[input.status];
+	const verdict = STATUS_TO_VERDICT[input.status]; // 原始 status 转译
 
 	if (verdict === undefined) {
 		throw new Error(`未知的提交状态码: ${input.status}`);

@@ -5,6 +5,10 @@ export const LUOGU_CONTENT_ONLY_HEADER = "x-lentille-request";
 export const LUOGU_CONTENT_ONLY_VALUE = "content-only";
 export const LUOGU_PAGE_DELAY_MS = 300;
 
+/**
+ * 直接在 parse 层转译成 verdict,
+ * 不排除未来洛谷官方增加新状态码的风险
+ */
 export const STATUS_TO_VERDICT: Partial<
 Record<number, Submission["verdict"]>
 > = {
