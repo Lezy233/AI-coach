@@ -157,4 +157,12 @@ describe("parseSubmissionsPage", () => {
       "提交记录字段不符合预期",
     );
   });
+
+  it("映射表外的状态码会抛错，并在错误信息中包含状态值", () => {
+    const unknownStatusRecord = { ...record1, status: 15 };
+
+    expect(() =>
+      parseSubmissionsPage(envelope([unknownStatusRecord])),
+    ).toThrow("未知的提交状态码: 15");
+  });
 });
