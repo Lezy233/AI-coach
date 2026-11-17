@@ -36,6 +36,14 @@ function isPositiveInteger(value: unknown): value is number {
   );
 }
 
+function isNonNegativeInteger(value: unknown): value is number {
+  return (
+    typeof value === "number" &&
+    Number.isInteger(value) &&
+    value >= 0
+  );
+}
+
 function readPageMeta(input: unknown): PageMeta {
   if (!isObject(input)) {
     throw new Error("响应必须是对象");
@@ -50,10 +58,7 @@ function readPageMeta(input: unknown): PageMeta {
 
   const { count, perPage } = input.data.records;
 
-  if (
-    !isPositiveInteger(count) ||
-    !isPositiveInteger(perPage)
-  ) {
+  if (!isNonNegativeInteger(count) || !isPositiveInteger(perPage)) {
     throw new Error("响应中 count 或 perPage 字段不合法");
   }
 
@@ -106,13 +111,12 @@ function getPageRecordsLength(input: unknown): number {
     throw new Error("响应中的 records 格式不正确");
   }
 
-  const result = input.data.records.result;
+  return normalizeResult(input.data.records.result).length;
+}
 
-  if (!isObject(result)) {
-    throw new Error("响应中的 result 格式不正确");
-  }
-
-  return normalizeResult(result).length;
+function expectedRowsForPage(page: number, meta: PageMeta): number {
+  const remaining = meta.count - (page - 1) * meta.perPage;
+  return Math.max(0, Math.min(meta.perPage, remaining));
 }
 
 // function getMaxSubmissionId(
@@ -188,8 +192,12 @@ async function fetchPage(
     throw new Error("响应记录数量与解析结果不一致");
   }
 
-  if (actualLength > meta.perPage) {
-    throw new Error("单页记录数超过 perPage 限制");
+  const expectedLength = expectedRowsForPage(page, meta);
+
+  if (actualLength !== expectedLength) {
+    throw new Error(
+      `第 ${page} 页记录数不正确：期望 ${expectedLength} 条，实际 ${actualLength} 条`,
+    );
   }
 
   return { body, meta, submissions };
@@ -227,7 +235,7 @@ export async function fetchSubmissions(
     } else if (
       meta.count !== expectedMeta.count ||
       meta.perPage !== expectedMeta.perPage
-    ) {
+    ) { // count/perPage 跨页应保持一致
       throw new Error("分页期间 count 或 perPage 发生变化");
     }
 
@@ -251,6 +259,18 @@ export async function fetchSubmissions(
     }
 
     page += 1;
+  }
+
+  if (knownMaxId === 0 && expectedMeta !== undefined) {
+    const uniqueIds = new Set(
+      allSubmissions.map((submission) => submission.id),
+    );
+
+    if (uniqueIds.size !== expectedMeta.count) {
+      throw new Error(
+        `提交记录唯一 ID 数量不正确：期望 ${expectedMeta.count} 个，实际 ${uniqueIds.size} 个`,
+      );
+    }
   }
 
   return allSubmissions;
