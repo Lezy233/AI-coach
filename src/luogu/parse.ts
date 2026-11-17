@@ -33,7 +33,7 @@ function isNullableObject(
  * 1. result: [...]
  * 2. result: { "0": {...}, "1": {...}, ... }
  */
-function normalizeResult(value: unknown): unknown[] {
+export function normalizeResult(value: unknown): unknown[] {
   if (Array.isArray(value)) {
     return value;
   }

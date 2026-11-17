@@ -5,7 +5,7 @@ import {
   LUOGU_RECORD_LIST_PATH,
   LUOGU_PAGE_DELAY_MS,
 } from "./contract";
-import { parseSubmissionsPage } from "./parse"
+import { normalizeResult, parseSubmissionsPage } from "./parse"
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -112,7 +112,7 @@ function getPageRecordsLength(input: unknown): number {
     throw new Error("响应中的 result 格式不正确");
   }
 
-  return Object.keys(result).length;
+  return normalizeResult(result).length;
 }
 
 // function getMaxSubmissionId(
