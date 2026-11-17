@@ -1,0 +1,35 @@
+{
+  "id": 246874063,
+  "status": 14,
+  "enableO2": true,
+  "score": 95,
+  "time": 104,
+  "memory": 1072,
+  "sourceCodeLength": 837,
+  "submitTime": 1762949742,
+  "language": 27,
+  "user": {
+    "uid": 851600,
+    "avatar": "https://cdn.luogu.com.cn/upload/usericon/851600.png",
+    "name": "Lezy233",
+    "slogan": "=￣ω￣=",
+    "badge": null,
+    "isAdmin": false,
+    "isBanned": false,
+    "color": "Green",
+    "ccfLevel": 0,
+    "xcpcLevel": 6,
+    "background": "",
+    "verified": true
+  },
+  "contest": null,
+  "problem": {
+    "pid": "T684525",
+    "type": "T",
+    "name": "隔墙花影旧相知",
+    "difficulty": 1,
+    "fullScore": 100,
+    "submitted": true,
+    "accepted": true
+  }
+}

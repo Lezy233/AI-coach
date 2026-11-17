@@ -1,0 +1,35 @@
+{
+  "id": 191524566,
+  "status": 2,
+  "enableO2": true,
+  "score": null,
+  "time": 0,
+  "memory": 0,
+  "sourceCodeLength": 2039,
+  "submitTime": 1732713834,
+  "language": 27,
+  "user": {
+    "uid": 851600,
+    "avatar": "https://cdn.luogu.com.cn/upload/usericon/851600.png",
+    "name": "Lezy233",
+    "slogan": "=￣ω￣=",
+    "badge": null,
+    "isAdmin": false,
+    "isBanned": false,
+    "color": "Green",
+    "ccfLevel": 0,
+    "xcpcLevel": 6,
+    "background": "",
+    "verified": true
+  },
+  "contest": null,
+  "problem": {
+    "pid": "P8435",
+    "type": "P",
+    "name": "【模板】点双连通分量",
+    "difficulty": 4,
+    "fullScore": 100,
+    "submitted": true,
+    "accepted": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": 188644580,
+  "status": 12,
+  "enableO2": true,
+  "score": 100,
+  "time": 18,
+  "memory": 636,
+  "sourceCodeLength": 995,
+  "submitTime": 1731558865,
+  "language": 27,
+  "user": {
+    "uid": 851600,
+    "avatar": "https://cdn.luogu.com.cn/upload/usericon/851600.png",
+    "name": "Lezy233",
+    "slogan": "=￣ω￣=",
+    "badge": null,
+    "isAdmin": false,
+    "isBanned": false,
+    "color": "Green",
+    "ccfLevel": 0,
+    "xcpcLevel": 6,
+    "background": "",
+    "verified": true
+  },
+  "contest": {
+    "id": 212015,
+    "startTime": 1730883049,
+    "endTime": 1736780400,
+    "name": "NOV13"
+  },
+  "problem": {
+    "pid": "U501270",
+    "type": "U",
+    "name": "喜欢的字符串",
+    "difficulty": 1,
+    "fullScore": 100,
+    "submitted": false,
+    "accepted": false
+  }
+}

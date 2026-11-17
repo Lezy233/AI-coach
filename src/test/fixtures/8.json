@@ -1,0 +1,34 @@
+{
+  "id": 171279336,
+  "status": 11,
+  "enableO2": false,
+  "time": 0,
+  "memory": 0,
+  "sourceCodeLength": 2665,
+  "submitTime": 1723049180,
+  "language": 27,
+  "user": {
+    "uid": 851600,
+    "avatar": "https://cdn.luogu.com.cn/upload/usericon/851600.png",
+    "name": "Lezy233",
+    "slogan": "=￣ω￣=",
+    "badge": null,
+    "isAdmin": false,
+    "isBanned": false,
+    "color": "Green",
+    "ccfLevel": 0,
+    "xcpcLevel": 6,
+    "background": "",
+    "verified": true
+  },
+  "contest": null,
+  "problem": {
+    "pid": "CF660E",
+    "type": "CF",
+    "name": "Different Subsets For All Tuples",
+    "difficulty": 5,
+    "fullScore": 100,
+    "submitted": true,
+    "accepted": false
+  }
+}

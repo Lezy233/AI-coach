@@ -1,0 +1,35 @@
+{
+  "id": 205384591,
+  "status": 12,
+  "enableO2": false,
+  "score": 100,
+  "time": 321,
+  "memory": 34120,
+  "sourceCodeLength": 969,
+  "submitTime": 1740823170,
+  "language": 25,
+  "user": {
+    "uid": 851600,
+    "avatar": "https://cdn.luogu.com.cn/upload/usericon/851600.png",
+    "name": "Lezy233",
+    "slogan": "=￣ω￣=",
+    "badge": null,
+    "isAdmin": false,
+    "isBanned": false,
+    "color": "Green",
+    "ccfLevel": 0,
+    "xcpcLevel": 6,
+    "background": "",
+    "verified": true
+  },
+  "contest": null,
+  "problem": {
+    "pid": "P5738",
+    "type": "P",
+    "name": "【深基7.例4】歌唱比赛",
+    "difficulty": 2,
+    "fullScore": 100,
+    "submitted": true,
+    "accepted": true
+  }
+}
