@@ -8,7 +8,7 @@
 
 ### 浏览器扩展
 
-基于 Manifest V3 的洛谷提交导出工具。content script 在洛谷页面中注入最小操作面板，使用当前登录态请求提交记录，并将结果下载为 JSON。
+基于 Manifest V3 的洛谷提交导出工具。content script 在洛谷记录页和用户页中注入操作面板，使用当前登录态请求提交记录，支持文字进度、中止抓取和 JSON 下载。
 
 - 入口：`src/extension/content.ts`
 - 清单：`public/manifest.json`
@@ -17,20 +17,23 @@
 
 ### 抓取与解析管线
 
-抓取层负责登录态请求、分页、增量终止和分页一致性检查；解析层负责校验原始响应，并将其转换为统一的 `Submission` 领域模型。
+抓取层负责登录态请求、分页、增量终止、进度回调、中止和分页一致性检查；解析层负责校验原始响应，并将其转换为统一的 `Submission` 领域模型。
 
 - `src/luogu/fetch.ts`：分页抓取入口 `fetchSubmissions`
 - `src/luogu/parse.ts`：响应校验与解析
 - `src/luogu/contract.ts`：洛谷接口契约及状态映射
-- `src/toSubmission.ts`：统一提交记录类型
+- `src/domain/submission.ts`：共享 `Submission`、`Verdict` 领域类型
 - `docs/luogu-api-research.md`：接口调研与限制说明
 
 ### AI Coach 静态站点
 
-基于 React 和 Vite 的 Web 产物，计划承载提交数据展示和 AI 教练交互，并部署到 GitHub Pages。
+基于 React 和 Vite 的 Web 产物，计划承载提交数据展示和 AI 教练交互，并部署到 GitHub Pages。当前已引入 Dexie 本地数据库和提交记录状态 Hook。
 
 - HTML 入口：`index.html`
-- 应用入口：`src/main.tsx`
+- 应用入口：`src/web/main.tsx`
+- 页面组件：`src/web/App.tsx`
+- 本地数据库：`src/web/storage/db.ts`
+- 提交记录 Hook：`src/web/hooks/useSubmissions.tsx`
 - 构建配置：`vite.config.ts`
 - 构建产物：`dist/`
 
@@ -40,31 +43,34 @@
 
 | 产物 | 构建命令 | 配置 | 输出目录 |
 | --- | --- | --- | --- |
-| AI Coach 静态站点 | `npm run build` | `vite.config.ts` | `dist/` |
-| 洛谷浏览器扩展 | `npm run build:extension` | `vite.config.extension.ts` | `dist-extension/` |
+| AI Coach 静态站点 | `pnpm build` | `vite.config.ts` | `dist/` |
+| 洛谷浏览器扩展 | `pnpm build:extension` | `vite.config.extension.ts` | `dist-extension/` |
 
 ## 本地开发
+
+仓库统一使用 pnpm，版本由 `package.json` 的 `packageManager` 字段声明。建议使用 Corepack 激活对应版本，不要生成或提交 `package-lock.json`。
 
 安装依赖：
 
 ```bash
-npm install
+corepack enable
+pnpm install
 ```
 
 常用命令：
 
 ```bash
-npm run dev              # 启动静态站点开发服务器
-npm run build            # 构建静态站点
-npm run preview          # 预览静态站点构建产物
-npm run build:extension  # 构建 MV3 浏览器扩展
-npm run test             # 运行测试
-npm run lint             # 运行 ESLint
+pnpm dev              # 启动静态站点开发服务器
+pnpm build            # 构建静态站点
+pnpm preview          # 预览静态站点构建产物
+pnpm build:extension  # 构建 MV3 浏览器扩展
+pnpm test             # 运行测试
+pnpm lint             # 运行 ESLint
 ```
 
 ## 使用浏览器扩展
 
-1. 执行 `npm run build:extension`。
+1. 执行 `pnpm build:extension`。
 2. 打开 Chromium 内核浏览器的扩展管理页，开启“开发者模式”。
 3. 选择“加载已解压的扩展程序”，加载 `dist-extension/`。
 4. 登录洛谷并打开或刷新 `/record/*` 或 `/user/*` 页面。
@@ -95,7 +101,7 @@ npm run lint             # 运行 ESLint
 
 ## GitHub Pages
 
-静态站点使用相对资源路径（`base: './'`），可部署到用户站点或项目站点子路径。执行 `npm run build` 后，将 `dist/` 发布到 GitHub Pages 即可；可以通过 GitHub Actions 或 Pages 的 branch 发布方式完成部署。
+静态站点使用相对资源路径（`base: './'`），可部署到用户站点或项目站点子路径。执行 `pnpm build` 后，将 `dist/` 发布到 GitHub Pages 即可；可以通过 GitHub Actions 或 Pages 的 branch 发布方式完成部署。
 
 浏览器扩展不属于静态站点产物，不应将 `dist-extension/` 作为 GitHub Pages 网站发布。
 
@@ -104,6 +110,8 @@ npm run lint             # 运行 ESLint
 完整导出文件可能包含 UID、提交时间和练习记录，默认保存在本地的 `data/exports/`，该目录已被 Git 忽略。
 
 自动化测试应使用 `src/test/fixtures/` 中最小化、脱敏后的样本，不直接依赖完整个人导出文件。
+
+Web 站点中的 Dexie 数据库属于当前网站源；它与洛谷页面中的数据存储相互隔离，不会因为共用代码而自动同步。
 
 ## 当前边界
 
