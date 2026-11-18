@@ -7,10 +7,16 @@ import {
 } from "./contract";
 import { isObject, normalizeResult, parseSubmissionsPage } from "./parse"
 
+export type FetchProgress = {
+  fetched: number;
+  total: number;
+};
+
 type FetchSubmissionsOptions = {
   baseUrl?: string;
   knownMaxId?: number;
   signal?: AbortSignal;
+  onProgress?: (progress: FetchProgress) => void;
 };
 
 type PageMeta = {
@@ -128,7 +134,7 @@ function sleep(
       return;
     }
 
-    const timer = window.setTimeout(resolve, milliseconds);
+    const timer = globalThis.setTimeout(resolve, milliseconds);
 
     signal?.addEventListener("abort", () => {
       clearTimeout(timer);
@@ -233,6 +239,10 @@ export async function fetchSubmissions(
     );
 
     allSubmissions.push(...freshSubmissions);
+    options.onProgress?.({
+      fetched: allSubmissions.length,
+      total: meta.count,
+    });
 
     const reachedKnownRecord =
       submissions.some((submission) => submission.id <= knownMaxId);
