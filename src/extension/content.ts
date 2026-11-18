@@ -125,22 +125,35 @@ const styles = `
     background: var(--accent-hover);
   }
 
-  .export {
+  .export, .cancel {
     border-color: var(--border);
     background: var(--secondary);
     color: var(--foreground);
   }
 
-  .export:not(:disabled):hover {
+  .export:not(:disabled):hover, .cancel:not(:disabled):hover {
     background: var(--secondary-hover);
   }
 
-  .status {
+  .cancel {
+    grid-column: 1 / -1;
+  }
+
+  .cancel[hidden], .progress[hidden] {
+    display: none;
+  }
+
+  .progress, .status {
     min-height: 18px;
     margin: 10px 0 0;
     color: var(--muted);
     font-size: 12px;
     overflow-wrap: anywhere;
+  }
+
+  .progress {
+    margin-bottom: -4px;
+    font-variant-numeric: tabular-nums;
   }
 
   .status[data-kind="error"] {
@@ -194,14 +207,16 @@ function mountPanel(): void {
           step="1"
           inputmode="numeric"
           autocomplete="off"
-          placeholder="填写自己的洛谷用户编号，例如：8457"
+          placeholder="填写洛谷用户编号，例如：10086"
           required
         />
         <div class="actions">
           <button class="fetch" type="submit">抓取提交</button>
           <button class="export" type="button" disabled>导出 JSON</button>
+          <button class="cancel" type="button" hidden>中止抓取</button>
         </div>
       </form>
+      <p class="progress" hidden>进度：0/…</p>
       <p class="status" role="status" aria-live="polite">输入 UID 后开始抓取。</p>
     </section>
   `;
@@ -210,12 +225,16 @@ function mountPanel(): void {
   const input = shadow.querySelector<HTMLInputElement>("input")!;
   const fetchButton = shadow.querySelector<HTMLButtonElement>(".fetch")!;
   const exportButton = shadow.querySelector<HTMLButtonElement>(".export")!;
+  const cancelButton = shadow.querySelector<HTMLButtonElement>(".cancel")!;
+  const progress = shadow.querySelector<HTMLParagraphElement>(".progress")!;
   const status = shadow.querySelector<HTMLParagraphElement>(".status")!;
 
   let submissions: Submission[] | undefined;
   let resultUid: number | undefined;
+  let activeController: AbortController | undefined;
+  let observedLocationUid = uidFromLocation();
 
-  input.value = uidFromLocation();
+  input.value = observedLocationUid;
 
   function setStatus(message: string, kind: "idle" | "error" = "idle"): void {
     status.textContent = message;
@@ -227,11 +246,31 @@ function mountPanel(): void {
       submissions === undefined || resultUid !== Number(input.value);
   }
 
+  function syncUidFromLocation(): void {
+    const uid = uidFromLocation();
+    if (uid === "" || uid === observedLocationUid) {
+      return;
+    }
+
+    observedLocationUid = uid;
+    input.value = uid;
+    updateExportButton();
+    if (activeController === undefined && submissions !== undefined) {
+      setStatus("UID 已随页面导航变化，请重新抓取。");
+    }
+  }
+
   input.addEventListener("input", () => {
     updateExportButton();
     if (submissions !== undefined && resultUid !== Number(input.value)) {
       setStatus("UID 已变化，请重新抓取。");
     }
+  });
+
+  cancelButton.addEventListener("click", () => {
+    activeController?.abort();
+    cancelButton.disabled = true;
+    setStatus("正在中止抓取…");
   });
 
   form.addEventListener("submit", async (event) => {
@@ -244,26 +283,43 @@ function mountPanel(): void {
       return;
     }
 
+    const controller = new AbortController();
+    activeController = controller;
     submissions = undefined;
     resultUid = undefined;
     input.disabled = true;
     fetchButton.disabled = true;
     fetchButton.textContent = "抓取中…";
     exportButton.disabled = true;
-    setStatus("正在抓取全部提交记录，请稍候…");
+    cancelButton.hidden = false;
+    cancelButton.disabled = false;
+    progress.hidden = false;
+    progress.textContent = "进度：0/…";
+    setStatus("正在抓取提交记录，可随时中止。");
 
     try {
-      const result = await fetchSubmissions(uid);
+      const result = await fetchSubmissions(uid, {
+        signal: controller.signal,
+        onProgress: ({ fetched, total }) => {
+          progress.textContent = `进度：${fetched}/${total}`;
+        },
+      });
       submissions = result;
       resultUid = uid;
       setStatus(`已获取 ${result.length} 条提交，可以导出 JSON。`);
     } catch (error) {
-      const message = error instanceof Error ? error.message : "未知错误";
-      setStatus(`抓取失败：${message}`, "error");
+      if (error instanceof DOMException && error.name === "AbortError") {
+        setStatus("抓取已中止。");
+      } else {
+        const message = error instanceof Error ? error.message : "未知错误";
+        setStatus(`抓取失败：${message}`, "error");
+      }
     } finally {
+      activeController = undefined;
       input.disabled = false;
       fetchButton.disabled = false;
       fetchButton.textContent = "抓取提交";
+      cancelButton.hidden = true;
       updateExportButton();
     }
   });
@@ -276,6 +332,9 @@ function mountPanel(): void {
     downloadSubmissions(resultUid, submissions);
     setStatus(`已导出 ${submissions.length} 条提交记录。`);
   });
+
+  window.addEventListener("popstate", syncUidFromLocation);
+  window.setInterval(syncUidFromLocation, 500);
 
   document.body.append(host);
 }

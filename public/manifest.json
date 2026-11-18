@@ -5,7 +5,10 @@
   "description": "抓取洛谷提交记录并导出为 JSON，供 AI 分析。",
   "content_scripts": [
     {
-      "matches": ["https://www.luogu.com.cn/*"],
+      "matches": [
+        "https://www.luogu.com.cn/record/*",
+        "https://www.luogu.com.cn/user/*"
+      ],
       "js": ["assets/content.js"],
       "run_at": "document_idle"
     }
