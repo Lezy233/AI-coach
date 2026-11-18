@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Submission } from "../toSubmission";
+import type { Submission } from "../domain/submission";
 import record1 from "../test/fixtures/1.json";
 import record2 from "../test/fixtures/2.json";
 import record3 from "../test/fixtures/3.json";

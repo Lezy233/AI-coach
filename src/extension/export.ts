@@ -1,4 +1,4 @@
-import type { Submission } from "../toSubmission";
+import type { Submission } from "../domain/submission";
 
 export function serializeSubmissions(
   uid: number,

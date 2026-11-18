@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Submission } from "../toSubmission";
+import type { Submission } from "../domain/submission";
 import { createExportFilename, serializeSubmissions } from "./export";
 
 const submission: Submission = {

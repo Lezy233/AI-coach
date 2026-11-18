@@ -1,4 +1,4 @@
-import type { Submission } from "../toSubmission";
+import type { Submission } from "../domain/submission";
 import {
   STATUS_TO_VERDICT,
   type RawLuoguRecord

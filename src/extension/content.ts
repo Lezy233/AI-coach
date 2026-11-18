@@ -1,5 +1,5 @@
 import { fetchSubmissions } from "../luogu/fetch";
-import type { Submission } from "../toSubmission";
+import type { Submission } from "../domain/submission";
 import { downloadSubmissions } from "./export";
 
 const HOST_ID = "ai-coach-luogu-panel";

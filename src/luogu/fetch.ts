@@ -1,4 +1,4 @@
-import type { Submission } from "../toSubmission";
+import type { Submission } from "../domain/submission";
 import {
   LUOGU_CONTENT_ONLY_HEADER,
   LUOGU_CONTENT_ONLY_VALUE,
