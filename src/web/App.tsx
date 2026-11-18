@@ -1,6 +1,156 @@
+import { memo, useState } from 'react'
 import './App.css'
+import type { Submission, Verdict } from '../domain/submission'
+import useSubmissions from './hooks/useSubmissions'
+import { SettingsProvider } from './SettingsProvider'
+import { useSettings } from './hooks/useSettings'
+
+function SettingsPanel() {
+  const { settings, setApiKey, setModel } = useSettings();
+  const [ keyInput, setKeyInput ] = useState("");
+
+  return (
+    <div>
+      <h2>AI Settings</h2>
+
+      <label>
+        API Key:
+        <input
+          type="text"
+          value={keyInput}
+          onChange={(e) => setKeyInput(e.target.value)}
+        />
+        <button onClick={() => {
+          setApiKey(keyInput)
+        }}>Apply</button>
+      </label>
+
+      <br />
+
+      <label>
+        Model:
+        <select
+          value={settings.model}
+          onChange={(e) => setModel(e.target.value)}
+        >
+          <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+          <option value="gpt-4">GPT-4</option>
+        </select>
+      </label>
+    </div>
+  )
+}
+
+const AnalysisBar = memo(function AnalysisBar() {
+  const { settings } = useSettings();
+
+  return (
+    <div>
+      <h2>Analysis Bar</h2>
+      <p>Current API Key: {settings.apiKey}</p>
+      <p>Current Model: {settings.model}</p>
+    </div>
+  )
+});
+
+function SubmissionList({
+  submission,
+  verdict,
+  expandedIds,
+  onToggle
+}: {
+  submission: Submission[],
+  verdict: Verdict,
+  expandedIds: Set<number>,
+  onToggle: (id: number) => void
+}) {
+  return (
+    <ul>
+      {submission.filter((s) => s.verdict === verdict).map((s) => (
+        <li key={s.id}>
+          {s.problem} - {s.verdict}
+          <button onClick={() => onToggle(s.id)}>
+            {expandedIds.has(s.id) ? "收起" : "展开"}
+          </button>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function SettingsSection() {
+  return (
+    <div>
+      <SettingsPanel />
+      <AnalysisBar />
+    </div>
+  )
+}
+
+
+function ShowAll({ submission }: {
+  submission: Submission[],
+}) {
+  const [expandedIds, setExpandedIds] = useState<Set<number>>(() => new Set());
+
+  const toggleExpanded = (id: number) => {
+    setExpandedIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  }
+
+  return (
+    <div>
+      <SettingsSection />
+
+      <h2>AC 部分</h2>
+      <SubmissionList
+        submission={submission}
+        verdict="AC"
+        expandedIds={expandedIds}
+        onToggle={toggleExpanded}
+      />
+
+      <h2>WA 部分</h2>
+      <SubmissionList
+        submission={submission}
+        verdict="WA"
+        expandedIds={expandedIds}
+        onToggle={toggleExpanded}
+      />
+    </div>
+  )
+}
 
 function App() {
+  const { subs, addSubmission, markAC } = useSubmissions()
+
+  return (
+    <>
+      <SettingsProvider>
+        <section id="center">
+          <ul>
+            {subs.map((s) => (
+              <li key={s.id}>
+                {s.problem} - {s.verdict}
+                <button onClick={() => markAC(s.id)}>标为 AC</button>
+              </li>
+            ))}
+          </ul>
+
+          <button onClick={addSubmission}>添加一条提交</button>
+
+          <ShowAll submission={subs}/>
+        </section>
+      </SettingsProvider>
+    </>
+  )
 }
 
 export default App
