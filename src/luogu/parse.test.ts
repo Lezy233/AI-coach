@@ -152,10 +152,17 @@ describe("parseSubmissionsPage", () => {
     expect(parseSubmissionsPage(envelope(result))).toStrictEqual([]);
   });
 
-  it("8.json 缺少 score，按当前契约拒绝解析，不把缺失字段当成 null", () => {
-    expect(() => parseSubmissionsPage(envelope([record8]))).toThrow(
-      "提交记录字段不符合预期",
-    );
+  it("8.json 的 UKE 记录缺少 score，解析为 null", () => {
+    expect(parseSubmissionsPage(envelope([record8]))).toStrictEqual([
+      {
+        id: 171279336,
+        score: null,
+        submitTime: new Date("2024-08-07T16:46:20.000Z"),
+        contest: null,
+        problem: "CF660E",
+        verdict: "UKE",
+      },
+    ]);
   });
 
   it("映射表外的状态码会抛错，并在错误信息中包含状态值", () => {

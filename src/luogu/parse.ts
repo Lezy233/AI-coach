@@ -76,7 +76,7 @@ function parseRecord(input: unknown): RawLuoguRecord {
 	if (
     !isNumber(input.id) || !Number.isInteger(input.id) ||         // id
     !isNumber(input.status) || !Number.isInteger(input.status) || // status
-    !isNullableNumber(input.score) ||                             // score
+    !(input.score === undefined || isNullableNumber(input.score)) || // score
     !isNumber(input.submitTime) ||                                // submitTime
     !isNullableObject(input.contest) ||                           // contest
 		!isObject(input.problem) || 																	// problem
@@ -89,7 +89,7 @@ function parseRecord(input: unknown): RawLuoguRecord {
 	return {
 		id: input.id,
 		status: input.status,
-		score: input.score,
+		score: input.score ?? null,
 		submitTime: input.submitTime,
 		contest: input.contest,
 		problem: {
