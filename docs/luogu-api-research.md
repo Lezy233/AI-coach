@@ -175,11 +175,15 @@ fetch('/record/list?user={uid}&page=1',{headers:{'x-lentille-request':'content-o
 
 ## 7. MV3 content script 可行性结论：可行，且是唯一正确路径
 
-1. content script 注入 `www.luogu.com.cn` 页面后，相对路径 fetch 与页面同源，自动携带 Cookie；
-2. 自定义头 `x-lentille-request` 属「非简单请求」，会触发 CORS 预检——content script 的请求以页面源发出，同源预检必过；若改从 extension service worker 发送，则需 `host_permissions` 且依赖服务端 CORS 响应头（未验证），**故必须走 content script 方案**；
-3. manifest 仅需 `content_scripts.matches: ["https://www.luogu.com.cn/*"]`；
-4. 增量抓取友好：倒序 + 本地最大 id 终止；错误处理注意 uid 不存在返回 **500 信封**而非 404；
+> **可信度声明（2026-11-18 修正）**：本节**全部为机制推断 [推断]，未经真实 MV3 扩展实测**。当时仅实测了「页面源 fetch」这一层（WebBridge 在 `www.luogu.com.cn` 页面上下文执行 fetch，Cookie 自动携带、`x-lentille-request` 被服务端接受、200 返回 JSON）；从未加载过真实扩展，无 manifest 对照实验。以下为 Chrome 平台机制文档级常识推断：
+
+1. content script 注入 `www.luogu.com.cn` 页面后，相对路径 fetch 与页面同源，自动携带 Cookie [推断]；
+2. 自定义头 `x-lentille-request` 属「非简单请求」，会触发 CORS 预检——content script 的请求以页面源发出，同源预检必过；若改从 extension service worker 发送，则需 `host_permissions` 且依赖服务端 CORS 响应头（未验证），**故必须走 content script 方案** [推断]；
+3. manifest 仅需 `content_scripts.matches: ["https://www.luogu.com.cn/*"]`，无需 `host_permissions` [推断]；
+4. 增量抓取友好：倒序 + 本地最大 id 终止；错误处理注意 uid 不存在返回 **500 信封**而非 404 [实测]；
 5. 主要风险：登录态失效需识别（500 / 重定向 / 信封 `user` 为游客）；抓取节奏建议 ≥ 300ms/页。
+
+**待实测**：写一个最小 MV3 扩展（manifest_v3，仅 `content_scripts.matches`、无 `host_permissions`），在洛谷页面内向 service worker 回传 fetch 结果，验证注入、Cookie、自定义头预检三点推断。
 
 ## 8. 仍开放的小问题（不阻塞开发）
 
