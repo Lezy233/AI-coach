@@ -1,0 +1,358 @@
+{
+  "source": "luogu",
+  "uid": 10086,
+  "exportedAt": "2026-11-18T08:40:50.937Z",
+  "submissions": [
+    {
+      "id": 246901955,
+      "score": 70,
+      "submitTime": "2025-11-12T13:39:38.000Z",
+      "contest": null,
+      "problem": "T684526",
+      "verdict": "NAC",
+      "status": "INVALID"
+    },
+    {
+      "id": 246900232,
+      "score": 70,
+      "submitTime": "2025-11-12T13:33:23.000Z",
+      "contest": null,
+      "problem": "T684526",
+      "verdict": "NAC"
+    },
+    {
+      "id": 246874350,
+      "score": 100,
+      "submitTime": "2025-11-12T12:16:19.000Z",
+      "contest": null,
+      "problem": "T684525",
+      "verdict": "AC"
+    },
+    {
+      "id": 246874063,
+      "score": 95,
+      "submitTime": "2025-11-12T12:15:42.000Z",
+      "contest": null,
+      "problem": "T684525",
+      "verdict": "NAC"
+    },
+    {
+      "id": 246865284,
+      "score": 100,
+      "submitTime": "2025-11-12T11:53:10.000Z",
+      "contest": null,
+      "problem": "T684524",
+      "verdict": "AC"
+    },
+    {
+      "id": 212342039,
+      "score": 100,
+      "submitTime": "2025-04-06T14:41:08.000Z",
+      "contest": null,
+      "problem": "P12015",
+      "verdict": "AC"
+    },
+    {
+      "id": 212340237,
+      "score": 20,
+      "submitTime": "2025-04-06T14:26:51.000Z",
+      "contest": null,
+      "problem": "P12015",
+      "verdict": "NAC"
+    },
+    {
+      "id": 205384591,
+      "score": 100,
+      "submitTime": "2025-03-01T09:59:30.000Z",
+      "contest": null,
+      "problem": "P5738",
+      "verdict": "AC"
+    },
+    {
+      "id": 191527648,
+      "score": 100,
+      "submitTime": "2024-11-27T13:32:38.000Z",
+      "contest": null,
+      "problem": "P8435",
+      "verdict": "AC"
+    },
+    {
+      "id": 191524966,
+      "score": 100,
+      "submitTime": "2024-11-27T13:25:04.000Z",
+      "contest": null,
+      "problem": "P8435",
+      "verdict": "AC"
+    },
+    {
+      "id": 191524634,
+      "score": null,
+      "submitTime": "2024-11-27T13:24:04.000Z",
+      "contest": null,
+      "problem": "P8435",
+      "verdict": "CE"
+    },
+    {
+      "id": 191524566,
+      "score": null,
+      "submitTime": "2024-11-27T13:23:54.000Z",
+      "contest": null,
+      "problem": "P8435",
+      "verdict": "CE"
+    },
+    {
+      "id": 190091498,
+      "score": 100,
+      "submitTime": "2024-11-20T19:19:58.000Z",
+      "contest": null,
+      "problem": "P10267",
+      "verdict": "AC"
+    },
+    {
+      "id": 190091491,
+      "score": 30,
+      "submitTime": "2024-11-20T19:17:12.000Z",
+      "contest": null,
+      "problem": "P10267",
+      "verdict": "NAC"
+    },
+    {
+      "id": 190091484,
+      "score": 30,
+      "submitTime": "2024-11-20T19:14:19.000Z",
+      "contest": null,
+      "problem": "P10267",
+      "verdict": "NAC"
+    },
+    {
+      "id": 190091415,
+      "score": 100,
+      "submitTime": "2024-11-20T18:47:45.000Z",
+      "contest": null,
+      "problem": "P10264",
+      "verdict": "AC"
+    },
+    {
+      "id": 188644580,
+      "score": 100,
+      "submitTime": "2024-11-14T04:34:25.000Z",
+      "contest": {
+        "id": 212015,
+        "startTime": 1730883049,
+        "endTime": 1736780400,
+        "name": "NOV13"
+      },
+      "problem": "U501270",
+      "verdict": "AC"
+    },
+    {
+      "id": 188644450,
+      "score": 60,
+      "submitTime": "2024-11-14T04:32:50.000Z",
+      "contest": {
+        "id": 212015,
+        "startTime": 1730883049,
+        "endTime": 1736780400,
+        "name": "NOV13"
+      },
+      "problem": "U501270",
+      "verdict": "NAC"
+    },
+    {
+      "id": 188644339,
+      "score": 60,
+      "submitTime": "2024-11-14T04:31:33.000Z",
+      "contest": {
+        "id": 212015,
+        "startTime": 1730883049,
+        "endTime": 1736780400,
+        "name": "NOV13"
+      },
+      "problem": "U501270",
+      "verdict": "NAC"
+    },
+    {
+      "id": 188643720,
+      "score": 100,
+      "submitTime": "2024-11-14T04:23:09.000Z",
+      "contest": {
+        "id": 212015,
+        "startTime": 1730883049,
+        "endTime": 1736780400,
+        "name": "NOV13"
+      },
+      "problem": "U501267",
+      "verdict": "AC"
+    },
+    {
+      "id": 188643449,
+      "score": 100,
+      "submitTime": "2024-11-14T04:19:05.000Z",
+      "contest": {
+        "id": 212015,
+        "startTime": 1730883049,
+        "endTime": 1736780400,
+        "name": "NOV13"
+      },
+      "problem": "U500976",
+      "verdict": "AC"
+    },
+    {
+      "id": 188643204,
+      "score": 100,
+      "submitTime": "2024-11-14T04:15:21.000Z",
+      "contest": {
+        "id": 212015,
+        "startTime": 1730883049,
+        "endTime": 1736780400,
+        "name": "NOV13"
+      },
+      "problem": "B2125",
+      "verdict": "AC"
+    },
+    {
+      "id": 188216630,
+      "score": 100,
+      "submitTime": "2024-11-11T13:28:03.000Z",
+      "contest": null,
+      "problem": "P8681",
+      "verdict": "AC"
+    },
+    {
+      "id": 187385785,
+      "score": 100,
+      "submitTime": "2024-11-08T02:08:11.000Z",
+      "contest": null,
+      "problem": "P8647",
+      "verdict": "AC"
+    },
+    {
+      "id": 186873391,
+      "score": 100,
+      "submitTime": "2024-11-05T02:46:32.000Z",
+      "contest": null,
+      "problem": "P1156",
+      "verdict": "AC"
+    },
+    {
+      "id": 186873072,
+      "score": 55,
+      "submitTime": "2024-11-05T02:43:54.000Z",
+      "contest": null,
+      "problem": "P1156",
+      "verdict": "NAC"
+    },
+    {
+      "id": 186871876,
+      "score": 55,
+      "submitTime": "2024-11-05T02:33:04.000Z",
+      "contest": null,
+      "problem": "P1156",
+      "verdict": "NAC"
+    },
+    {
+      "id": 186871333,
+      "score": 0,
+      "submitTime": "2024-11-05T02:27:53.000Z",
+      "contest": null,
+      "problem": "P1156",
+      "verdict": "NAC"
+    },
+    {
+      "id": 186871224,
+      "score": 0,
+      "submitTime": "2024-11-05T02:26:49.000Z",
+      "contest": null,
+      "problem": "P1156",
+      "verdict": "NAC"
+    },
+    {
+      "id": 186871042,
+      "score": 0,
+      "submitTime": "2024-11-05T02:25:08.000Z",
+      "contest": null,
+      "problem": "P1156",
+      "verdict": "NAC"
+    },
+    {
+      "id": 186870315,
+      "score": 1,
+      "submitTime": "2024-11-05T02:19:10.000Z",
+      "contest": null,
+      "problem": "P1156",
+      "verdict": "NAC"
+    },
+    {
+      "id": 184146973,
+      "score": 100,
+      "submitTime": "2024-10-22T18:24:25.000Z",
+      "contest": null,
+      "problem": "P1186",
+      "verdict": "AC"
+    },
+    {
+      "id": 184146933,
+      "score": 71,
+      "submitTime": "2024-10-22T18:17:33.000Z",
+      "contest": null,
+      "problem": "P1186",
+      "verdict": "NAC"
+    },
+    {
+      "id": 184146924,
+      "score": 71,
+      "submitTime": "2024-10-22T18:16:26.000Z",
+      "contest": null,
+      "problem": "P1186",
+      "verdict": "NAC"
+    },
+    {
+      "id": 184146888,
+      "score": 72,
+      "submitTime": "2024-10-22T18:10:23.000Z",
+      "contest": null,
+      "problem": "P1186",
+      "verdict": "NAC"
+    },
+    {
+      "id": 184146731,
+      "score": 61,
+      "submitTime": "2024-10-22T17:49:15.000Z",
+      "contest": null,
+      "problem": "P1186",
+      "verdict": "NAC"
+    },
+    {
+      "id": 183867248,
+      "score": 100,
+      "submitTime": "2024-10-21T13:17:26.000Z",
+      "contest": null,
+      "problem": "P1121",
+      "verdict": "AC"
+    },
+    {
+      "id": 183866879,
+      "score": 80,
+      "submitTime": "2024-10-21T13:16:35.000Z",
+      "contest": null,
+      "problem": "P1121",
+      "verdict": "NAC"
+    },
+    {
+      "id": 183862200,
+      "score": 80,
+      "submitTime": "2024-10-21T13:06:43.000Z",
+      "contest": null,
+      "problem": "P1121",
+      "verdict": "NAC"
+    },
+    {
+      "id": 183860401,
+      "score": 80,
+      "submitTime": "2024-10-21T13:02:53.000Z",
+      "contest": null,
+      "problem": "P1121",
+      "verdict": "NAC"
+    }
+  ]
+}
