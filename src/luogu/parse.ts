@@ -3,30 +3,12 @@ import {
   STATUS_TO_VERDICT,
   type RawLuoguRecord
 } from "./contract";
-
-type UnknownRecord = Record<string, unknown>;
-
-export function isObject( value: unknown): value is UnknownRecord {
-	return (
-		typeof value === "object" &&
-		value !== null &&
-		!Array.isArray(value)
-	);
-}
-
-function isNumber(value: unknown): value is number {
-  return typeof value === "number" && Number.isFinite(value);
-}
-
-function isNullableNumber(value: unknown): value is number | null {
-  return value === null || isNumber(value);
-}
-
-function isNullableObject(
-  value: unknown
-): value is UnknownRecord | null {
-  return value === null || isObject(value);
-}
+import {
+  isObject,
+  isNullableObject,
+  isFiniteNumber,
+  isNullableNumber,
+} from "./guards";
 
 /**
  * 兼容：
@@ -74,10 +56,10 @@ function parseRecord(input: unknown): RawLuoguRecord {
   }
 
 	if (
-    !isNumber(input.id) || !Number.isInteger(input.id) ||         // id
-    !isNumber(input.status) || !Number.isInteger(input.status) || // status
+    !isFiniteNumber(input.id) || !Number.isInteger(input.id) ||         // id
+    !isFiniteNumber(input.status) || !Number.isInteger(input.status) || // status
     !(input.score === undefined || isNullableNumber(input.score)) || // score
-    !isNumber(input.submitTime) ||                                // submitTime
+    !isFiniteNumber(input.submitTime) ||                                // submitTime
     !isNullableObject(input.contest) ||                           // contest
 		!isObject(input.problem) || 																	// problem
 		typeof input.problem.pid !== "string" || input.problem.pid.length === 0 ||

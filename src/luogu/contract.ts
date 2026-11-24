@@ -23,6 +23,19 @@ Record<number, Submission["verdict"]>
   14: "NAC",
 };
 
+export const VERDICTS = new Set<Submission["verdict"]>([
+  "CE",
+  "OLE",
+  "MLE",
+  "TLE",
+  "WA",
+  "RE",
+  "UKE",
+  "AC",
+  "NAC",
+]);
+
+
 export type RawLuoguRecord = {
   id: number;
   status: number;

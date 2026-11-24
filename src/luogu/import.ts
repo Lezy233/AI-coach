@@ -1,38 +1,12 @@
-import type { Submission, Verdict } from "../domain/submission";
-import { isObject } from "./parse";
+import type { Submission } from "../domain/submission";
+import {
+	isObject,
+	isFiniteNumber,
+	isInteger,
+	isValidDateString,
+	isVerdict,
+} from "./guards";
 
-const VERDICTS = new Set<Submission["verdict"]>([
-  "CE",
-  "OLE",
-  "MLE",
-  "TLE",
-  "WA",
-  "RE",
-  "UKE",
-  "AC",
-  "NAC",
-]);
-
-function isFiniteNumber(value: unknown): value is number {
-	return typeof value === "number" && Number.isFinite(value);
-}
-
-function isInteger(value: unknown): value is number {
-	return typeof value === "number" && Number.isInteger(value);
-}
-
-function isValidDateString(value: unknown): value is string {
-	if (typeof value !== "string") {
-		return false;
-	}
-
-	const iso8601DateTime = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
-	return iso8601DateTime.test(value) && !Number.isNaN(Date.parse(value));
-}
-
-function isVerdict(value: unknown): value is Verdict {
-	return typeof value === "string" && VERDICTS.has(value as Submission["verdict"]);
-}
 
 function parseImportedSubmission(
 	input: unknown,

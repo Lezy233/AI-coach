@@ -5,7 +5,12 @@ import {
   LUOGU_RECORD_LIST_PATH,
   LUOGU_PAGE_DELAY_MS,
 } from "./contract";
-import { isObject, normalizeResult, parseSubmissionsPage } from "./parse"
+import {
+  isObject,
+  isPositiveInteger,
+  isNonNegativeInteger,
+} from "./guards";
+import { normalizeResult, parseSubmissionsPage } from "./parse"
 
 export type FetchProgress = {
   fetched: number;
@@ -23,22 +28,6 @@ type PageMeta = {
   count: number;
   perPage: number;
 };
-
-function isPositiveInteger(value: unknown): value is number {
-  return (
-    typeof value === "number" &&
-    Number.isInteger(value) &&
-    value > 0
-  );
-}
-
-function isNonNegativeInteger(value: unknown): value is number {
-  return (
-    typeof value === "number" &&
-    Number.isInteger(value) &&
-    value >= 0
-  );
-}
 
 function readPageMeta(input: unknown): PageMeta {
   if (!isObject(input)) {
