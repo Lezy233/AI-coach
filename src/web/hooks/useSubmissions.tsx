@@ -20,9 +20,15 @@ function useSubmissions() {
   }, []);
 
   const importSubmissions = async (batch: Submission[]) => {
+    const ids = [...new Set(batch.map(({ id }) => id))];
+    const existingRows = await db.submissions.bulkGet(ids);
+    const overwritten = existingRows.filter((row) => row !== undefined).length;
+
     await db.submissions.bulkPut(batch);
     const rows = await db.submissions.toArray();
     setSubs(rows);
+
+    return { imported: ids.length - overwritten, overwritten };
   }
 
   const handleMarkVerdict = async (targetID: number, verdict: Verdict) => {

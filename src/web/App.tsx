@@ -4,6 +4,7 @@ import type { Submission, Verdict } from '../domain/submission'
 import useSubmissions from './hooks/useSubmissions'
 import { SettingsProvider } from './SettingsProvider'
 import { useSettings } from './hooks/useSettings'
+import { ImportPanel } from './ImportPanel'
 
 function SettingsPanel() {
   const { settings, setApiKey, setModel } = useSettings();
@@ -129,12 +130,14 @@ function ShowAll({ submission }: {
 }
 
 function App() {
-  const { subs, markAC } = useSubmissions()
+  const { subs, importSubmissions, markAC } = useSubmissions()
 
   return (
     <>
       <SettingsProvider>
         <section id="center">
+          <ImportPanel importSubmissions={importSubmissions} />
+
           <ul>
             {subs.map((s) => (
               <li key={s.id}>

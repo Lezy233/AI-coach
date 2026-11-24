@@ -27,7 +27,7 @@
 
 ### AI Coach 静态站点
 
-基于 React 和 Vite 的 Web 产物，计划承载提交数据展示和 AI 教练交互，并部署到 GitHub Pages。当前已引入 Dexie 本地数据库和提交记录状态 Hook。
+基于 React 和 Vite 的 Web 产物，计划承载提交数据展示和 AI 教练交互，并部署到 GitHub Pages。当前支持选择扩展导出的 JSON 文件，将提交记录写入 Dexie 本地数据库，并反馈新增导入和覆盖的记录数。
 
 - HTML 入口：`index.html`
 - 应用入口：`src/web/main.tsx`
