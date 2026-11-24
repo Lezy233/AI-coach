@@ -19,7 +19,7 @@ function useSubmissions() {
     };
   }, []);
 
-  const addSubmission = async (batch: Submission[]) => {
+  const importSubmissions = async (batch: Submission[]) => {
     await db.submissions.bulkPut(batch);
     const rows = await db.submissions.toArray();
     setSubs(rows);
@@ -47,7 +47,7 @@ function useSubmissions() {
     handleMarkVerdict(targetID, "AC");
   };
 
-  return { subs, addSubmission, markAC };
+  return { subs, importSubmissions, markAC };
 }
 
 export default useSubmissions;

@@ -53,8 +53,8 @@ describe("useSubmissions", () => {
     bulkPut.mockResolvedValue(undefined);
     toArray.mockResolvedValue(storedRows);
 
-    const { addSubmission } = useSubmissions();
-    await addSubmission(batch);
+    const { importSubmissions } = useSubmissions();
+    await importSubmissions(batch);
 
     expect(bulkPut).toHaveBeenCalledWith(batch);
     expect(put).not.toHaveBeenCalled();
