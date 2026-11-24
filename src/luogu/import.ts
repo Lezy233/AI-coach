@@ -38,7 +38,7 @@ function parseImportedSubmission(
 }
 
 /**
- * @abstract 将浏览器拓展导出的 json 文件解析为 Submission 对象
+ * 将浏览器拓展导出的 json 文件解析为 Submission 对象
  * @param input - 使用浏览器拓展从洛谷导出的 JSON 数据
  * @returns 解析后的 Submission 对象数组
  */
@@ -69,7 +69,7 @@ export function parseImportedSubmissions(
 }
 
 /**
- * @abstract 将浏览器拓展导出的 json 文件解析为 Submission 对象
+ * 将浏览器拓展导出的 json 文件解析为 Submission 对象
  */
 export function parseImportedSubmissionsJson(
 	text: string,
