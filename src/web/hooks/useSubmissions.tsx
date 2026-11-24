@@ -19,21 +19,11 @@ function useSubmissions() {
     };
   }, []);
 
-  const handleAddSubmission = async (sub: Submission) => {
-    await db.submissions.put(sub);
-    setSubs((prevSubs) => [...prevSubs, sub]);
+  const addSubmission = async (batch: Submission[]) => {
+    await db.submissions.bulkPut(batch);
+    const rows = await db.submissions.toArray();
+    setSubs(rows);
   }
-
-  const addSubmission = () => {
-    handleAddSubmission({
-      id: subs.length + 1,
-      score: 0,
-      submitTime: new Date(),
-      contest: null,
-      problem: "CCCC",
-      verdict: "TLE"
-    });
-  };
 
   const handleMarkVerdict = async (targetID: number, verdict: Verdict) => {
     const updated = subs.map((submission) => {

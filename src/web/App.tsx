@@ -129,7 +129,7 @@ function ShowAll({ submission }: {
 }
 
 function App() {
-  const { subs, addSubmission, markAC } = useSubmissions()
+  const { subs, markAC } = useSubmissions()
 
   return (
     <>
@@ -144,7 +144,6 @@ function App() {
             ))}
           </ul>
 
-          <button onClick={addSubmission}>添加一条提交</button>
 
           <ShowAll submission={subs}/>
         </section>
