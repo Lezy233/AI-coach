@@ -80,7 +80,7 @@ function parseRecord(input: unknown): RawLuoguRecord {
     !isNumber(input.submitTime) ||                                // submitTime
     !isNullableObject(input.contest) ||                           // contest
 		!isObject(input.problem) || 																	// problem
-		typeof input.problem.pid !== "string" ||
+		typeof input.problem.pid !== "string" || input.problem.pid.length === 0 ||
 		typeof input.problem.name !== "string"
 	) {
 		throw new Error("提交记录字段不符合预期");

@@ -26,7 +26,8 @@ function isValidDateString(value: unknown): value is string {
 		return false;
 	}
 
-	return !isNaN(new Date(value).getTime());
+	const iso8601DateTime = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+	return iso8601DateTime.test(value) && !Number.isNaN(Date.parse(value));
 }
 
 function isVerdict(value: unknown): value is Verdict {
@@ -45,10 +46,9 @@ function parseImportedSubmission(
     !isInteger(input.id) ||
     !(input.score === null || isFiniteNumber(input.score)) ||
 		!isValidDateString(input.submitTime) ||
-    !(input.contest === null || isObject(input.contest)) ||                           // contest
+    !(input.contest === null || isObject(input.contest)) ||
 		typeof input.problem !== "string" || input.problem.length === 0 ||
-		!isVerdict(input.verdict) ||
-		(input.status !== undefined && !isInteger(input.status))
+		!isVerdict(input.verdict)
 	) {
 		throw new Error(`导入文件中的 submission[${index}] 字段不符合预期`);
 	}
