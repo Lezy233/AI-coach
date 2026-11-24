@@ -49,6 +49,25 @@ describe("parseImportedSubmissions", () => {
       .toThrow(/字段不符合预期/);
   });
 
+  it("拒绝 source 不是 luogu 的信封", () => {
+    expect(() => parseImportedSubmissions({
+      ...luogu10086,
+      source: "other",
+    })).toThrow("导入文件的 source 必须为 luogu");
+  });
+
+  it("拒绝 submissions 不是数组的信封", () => {
+    expect(() => parseImportedSubmissions({
+      ...luogu10086,
+      submissions: {},
+    })).toThrow("导入文件的 submissions 必须是数组");
+  });
+
+  it("拒绝非法 JSON 文本", () => {
+    expect(() => parseImportedSubmissionsJson("{"))
+      .toThrow("导入文件不是有效的 JSON");
+  });
+
   /*
   it("拒绝 status/verdict 非法的导出记录", () => {
     expect(() => parseImportedSubmissions(luogu10089))
