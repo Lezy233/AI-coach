@@ -2,6 +2,7 @@ import { memo, useState } from 'react'
 import './App.css'
 import type { Submission, Verdict } from '../domain/submission'
 import useSubmissions from './hooks/useSubmissions'
+import { StatsPanel } from './StatsPanel'
 import { SettingsProvider } from './SettingsProvider'
 import { useSettings } from './hooks/useSettings'
 import { ImportPanel } from './ImportPanel'
@@ -142,8 +143,9 @@ function App() {
 
   return (
     <>
-      <SettingsProvider>
-        <section id="center">
+      <section id="center">
+        <StatsPanel subs={subs} />
+        <SettingsProvider>
           <ImportPanel importSubmissions={importSubmissions} />
 
           <ul>
@@ -157,8 +159,8 @@ function App() {
 
 
           <ShowAll submission={subs}/>
-        </section>
-      </SettingsProvider>
+        </SettingsProvider>
+      </section>
     </>
   )
 }
