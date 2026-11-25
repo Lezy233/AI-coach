@@ -22,6 +22,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "1.json：部分分映射为 NAC，保留 contest: null",
     record: record1,
     expected: {
+      platform: "luogu",
       id: 246901955,
       score: 70,
       submitTime: new Date("2025-11-12T13:39:38.000Z"),
@@ -34,6 +35,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "2.json：通过记录映射为 AC",
     record: record2,
     expected: {
+      platform: "luogu",
       id: 246874350,
       score: 100,
       submitTime: new Date("2025-11-12T12:16:19.000Z"),
@@ -46,6 +48,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "3.json：PyPy 记录也使用相同的 Submission 结构",
     record: record3,
     expected: {
+      platform: "luogu",
       id: 205384591,
       score: 100,
       submitTime: new Date("2025-03-01T09:59:30.000Z"),
@@ -58,6 +61,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "4.json：编译错误保留 score: null 和 contest: null",
     record: record4,
     expected: {
+      platform: "luogu",
       id: 191524634,
       score: null,
       submitTime: new Date("2024-11-27T13:24:04.000Z"),
@@ -70,6 +74,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "5.json：另一条编译错误同样保留两个 null",
     record: record5,
     expected: {
+      platform: "luogu",
       id: 191524566,
       score: null,
       submitTime: new Date("2024-11-27T13:23:54.000Z"),
@@ -82,6 +87,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "6.json：重复内容的 fixture 得到相同的字段值",
     record: record6,
     expected: {
+      platform: "luogu",
       id: 246901955,
       score: 70,
       submitTime: new Date("2025-11-12T13:39:38.000Z"),
@@ -94,6 +100,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "7.json：题目曾通过不代表这次提交通过，verdict 取决于 status",
     record: record7,
     expected: {
+      platform: "luogu",
       id: 246874063,
       score: 95,
       submitTime: new Date("2025-11-12T12:15:42.000Z"),
@@ -106,6 +113,7 @@ const cases: { name: string; record: unknown; expected: Submission }[] = [
     name: "9.json：完整保留非空 contest 对象",
     record: record9,
     expected: {
+      platform: "luogu",
       id: 188644580,
       score: 100,
       submitTime: new Date("2024-11-14T04:34:25.000Z"),
@@ -155,6 +163,7 @@ describe("parseSubmissionsPage", () => {
   it("8.json 的 UKE 记录缺少 score，解析为 null", () => {
     expect(parseSubmissionsPage(envelope([record8]))).toStrictEqual([
       {
+        platform: "luogu",
         id: 171279336,
         score: null,
         submitTime: new Date("2024-08-07T16:46:20.000Z"),

@@ -88,6 +88,7 @@ pnpm lint             # 运行 ESLint
   "exportedAt": "2026-11-18T08:00:00.000Z",
   "submissions": [
     {
+      "platform": "luogu",
       "id": 246874350,
       "score": 100,
       "submitTime": "2025-11-12T12:16:19.000Z",
@@ -111,7 +112,7 @@ pnpm lint             # 运行 ESLint
 
 自动化测试应使用 `src/test/fixtures/` 中最小化、脱敏后的样本，不直接依赖完整个人导出文件。
 
-Web 站点中的 Dexie 数据库属于当前网站源；它与洛谷页面中的数据存储相互隔离，不会因为共用代码而自动同步。
+Web 站点中的 Dexie 数据库属于当前网站源；它与洛谷页面中的数据存储相互隔离，不会因为共用代码而自动同步。提交记录使用 `[platform+id]` 复合主键，不同平台的相同数值 ID 互不影响。升级时，旧记录会补全 `platform: "luogu"` 并迁移到 `submissionsByPlatform` 表，旧表保留以避免数据丢失。
 
 ## 当前边界
 

@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 import { db } from '../storage/db'
-import type { Submission, Verdict } from '../../domain/submission'
+import {
+  submissionKey,
+  type Submission,
+  type SubmissionKey,
+  type Verdict,
+} from '../../domain/submission'
 
 function useSubmissions() {
   const [subs, setSubs] = useState<Submission[]>([]);
@@ -8,7 +13,7 @@ function useSubmissions() {
   useEffect(() => {
     let cancelled = false; // cancelled 只防卸载不防覆盖
 
-    db.submissions.toArray().then((rows) => {
+    db.submissionsByPlatform.toArray().then((rows) => {
       if (!cancelled) {
         setSubs(rows);
       }
@@ -20,20 +25,29 @@ function useSubmissions() {
   }, []);
 
   const importSubmissions = async (batch: Submission[]) => {
-    const ids = [...new Set(batch.map(({ id }) => id))];
-    const existingRows = await db.submissions.bulkGet(ids);
+    const keysBySerializedKey = new Map<string, SubmissionKey>();
+    for (const submission of batch) {
+      const key = submissionKey(submission);
+      keysBySerializedKey.set(JSON.stringify(key), key);
+    }
+    const keys = [...keysBySerializedKey.values()];
+    const existingRows = await db.submissionsByPlatform.bulkGet(keys);
     const overwritten = existingRows.filter((row) => row !== undefined).length;
 
-    await db.submissions.bulkPut(batch);
-    const rows = await db.submissions.toArray();
+    await db.submissionsByPlatform.bulkPut(batch);
+    const rows = await db.submissionsByPlatform.toArray();
     setSubs(rows);
 
-    return { imported: ids.length - overwritten, overwritten };
+    return { imported: keys.length - overwritten, overwritten };
   }
 
-  const handleMarkVerdict = async (targetID: number, verdict: Verdict) => {
+  const handleMarkVerdict = async (
+    platform: string,
+    targetID: number,
+    verdict: Verdict,
+  ) => {
     const updated = subs.map((submission) => {
-      if (submission.id !== targetID) {
+      if (submission.platform !== platform || submission.id !== targetID) {
         return submission;
       }
 
@@ -45,12 +59,12 @@ function useSubmissions() {
       return updatedSubmission;
     });
 
-    await db.submissions.bulkPut(updated);
+    await db.submissionsByPlatform.bulkPut(updated);
     setSubs(updated);
   }
 
-  const markAC = (targetID: number) => {
-    handleMarkVerdict(targetID, "AC");
+  const markAC = (platform: string, targetID: number) => {
+    handleMarkVerdict(platform, targetID, "AC");
   };
 
   return { subs, importSubmissions, markAC };

@@ -15,6 +15,7 @@ describe("parseImportedSubmissions", () => {
 
     expect(submissions).toHaveLength(luogu10086.submissions.length);
     expect(submissions[0]).toStrictEqual({
+      platform: "luogu",
       id: 246901955,
       score: 70,
       submitTime: new Date("2025-11-12T13:39:38.000Z"),
@@ -23,6 +24,7 @@ describe("parseImportedSubmissions", () => {
       verdict: "NAC",
     });
     expect(submissions.at(-1)).toStrictEqual({
+      platform: "luogu",
       id: 183860401,
       score: 80,
       submitTime: new Date("2024-10-21T13:02:53.000Z"),
@@ -47,6 +49,13 @@ describe("parseImportedSubmissions", () => {
   it("拒绝时间格式非法的导出记录", () => {
     expect(() => parseImportedSubmissions(luogu10088))
       .toThrow(/字段不符合预期/);
+  });
+
+  it("拒绝记录 platform 与信封 source 不一致的导出文件", () => {
+    expect(() => parseImportedSubmissions({
+      ...luogu10086,
+      submissions: [{ ...luogu10086.submissions[0], platform: "other" }],
+    })).toThrow(/字段不符合预期/);
   });
 
   it("拒绝 source 不是 luogu 的信封", () => {

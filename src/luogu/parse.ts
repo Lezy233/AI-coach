@@ -89,6 +89,7 @@ function toSubmission(input: RawLuoguRecord): Submission {
 	}
 
 	return {
+		platform: "luogu",
 		id: input.id,
 		score: input.score,
 		submitTime: new Date(input.submitTime * 1000),

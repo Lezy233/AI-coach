@@ -9,6 +9,7 @@ import {
 
 
 function parseImportedSubmission(
+	platform: string,
 	input: unknown,
 	index: number,
 ): Submission {
@@ -22,12 +23,14 @@ function parseImportedSubmission(
 		!isValidDateString(input.submitTime) ||
     !(input.contest === null || isObject(input.contest)) ||
 		typeof input.problem !== "string" || input.problem.length === 0 ||
-		!isVerdict(input.verdict)
+		!isVerdict(input.verdict) ||
+		(input.platform !== undefined && input.platform !== platform)
 	) {
 		throw new Error(`导入文件中的 submission[${index}] 字段不符合预期`);
 	}
 
 	return {
+		platform,
 		id: input.id,
 		score: input.score,
 		submitTime: new Date(input.submitTime),
@@ -65,7 +68,11 @@ export function parseImportedSubmissions(
 		throw new Error("导入文件的 submissions 必须是数组");
 	}
 
-	return input.submissions.map(parseImportedSubmission);
+	const platform = input.source;
+
+	return input.submissions.map((record, index) =>
+		parseImportedSubmission(platform, record, index),
+	);
 }
 
 /**

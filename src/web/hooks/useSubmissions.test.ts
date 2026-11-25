@@ -17,7 +17,7 @@ vi.mock("react", () => ({
 
 vi.mock("../storage/db", () => ({
   db: {
-    submissions: {
+    submissionsByPlatform: {
       bulkGet,
       bulkPut,
       put,
@@ -28,6 +28,7 @@ vi.mock("../storage/db", () => ({
 
 const batch: Submission[] = [
   {
+    platform: "luogu",
     id: 246901955,
     score: 70,
     submitTime: new Date("2025-11-12T13:39:38.000Z"),
@@ -36,6 +37,7 @@ const batch: Submission[] = [
     verdict: "NAC",
   },
   {
+    platform: "luogu",
     id: 246874350,
     score: 100,
     submitTime: new Date("2025-11-12T12:16:19.000Z"),
@@ -50,7 +52,7 @@ describe("useSubmissions", () => {
     vi.clearAllMocks();
   });
 
-  it("bulk-puts source IDs and replaces state with database rows", async () => {
+  it("bulk-puts compound keys and replaces state with database rows", async () => {
     const storedRows = [batch[1], batch[0]];
     bulkGet.mockResolvedValue([undefined, undefined]);
     bulkPut.mockResolvedValue(undefined);
@@ -59,7 +61,10 @@ describe("useSubmissions", () => {
     const { importSubmissions } = useSubmissions();
     const result = await importSubmissions(batch);
 
-    expect(bulkGet).toHaveBeenCalledWith(batch.map(({ id }) => id));
+    expect(bulkGet).toHaveBeenCalledWith([
+      ["luogu", 246901955],
+      ["luogu", 246874350],
+    ]);
     expect(bulkPut).toHaveBeenCalledWith(batch);
     expect(put).not.toHaveBeenCalled();
     expect(toArray).toHaveBeenCalledTimes(1);
@@ -67,7 +72,7 @@ describe("useSubmissions", () => {
     expect(result).toStrictEqual({ imported: 2, overwritten: 0 });
   });
 
-  it("counts existing IDs as overwritten", async () => {
+  it("counts existing compound keys as overwritten", async () => {
     bulkGet.mockResolvedValue([batch[0], undefined]);
     bulkPut.mockResolvedValue(undefined);
     toArray.mockResolvedValue(batch);
@@ -76,5 +81,21 @@ describe("useSubmissions", () => {
     const result = await importSubmissions(batch);
 
     expect(result).toStrictEqual({ imported: 1, overwritten: 1 });
+  });
+
+  it("treats equal IDs from different platforms as distinct submissions", async () => {
+    const otherPlatformSubmission = { ...batch[0], platform: "codeforces" };
+    bulkGet.mockResolvedValue([undefined, undefined]);
+    bulkPut.mockResolvedValue(undefined);
+    toArray.mockResolvedValue([batch[0], otherPlatformSubmission]);
+
+    const { importSubmissions } = useSubmissions();
+    const result = await importSubmissions([batch[0], otherPlatformSubmission]);
+
+    expect(bulkGet).toHaveBeenCalledWith([
+      ["luogu", 246901955],
+      ["codeforces", 246901955],
+    ]);
+    expect(result).toStrictEqual({ imported: 2, overwritten: 0 });
   });
 });

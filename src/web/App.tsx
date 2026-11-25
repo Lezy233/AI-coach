@@ -54,6 +54,10 @@ const AnalysisBar = memo(function AnalysisBar() {
   )
 });
 
+function submissionUiKey({ platform, id }: Submission) {
+  return `${platform}:${id}`;
+}
+
 function SubmissionList({
   submission,
   verdict,
@@ -62,19 +66,23 @@ function SubmissionList({
 }: {
   submission: Submission[],
   verdict: Verdict,
-  expandedIds: Set<number>,
-  onToggle: (id: number) => void
+  expandedIds: Set<string>,
+  onToggle: (key: string) => void
 }) {
   return (
     <ul>
-      {submission.filter((s) => s.verdict === verdict).map((s) => (
-        <li key={s.id}>
-          {s.problem} - {s.verdict}
-          <button onClick={() => onToggle(s.id)}>
-            {expandedIds.has(s.id) ? "收起" : "展开"}
-          </button>
-        </li>
-      ))}
+      {submission.filter((s) => s.verdict === verdict).map((s) => {
+        const key = submissionUiKey(s);
+
+        return (
+          <li key={key}>
+            {s.problem} - {s.verdict}
+            <button onClick={() => onToggle(key)}>
+              {expandedIds.has(key) ? "收起" : "展开"}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   )
 }
@@ -92,15 +100,15 @@ function SettingsSection() {
 function ShowAll({ submission }: {
   submission: Submission[],
 }) {
-  const [expandedIds, setExpandedIds] = useState<Set<number>>(() => new Set());
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(() => new Set());
 
-  const toggleExpanded = (id: number) => {
+  const toggleExpanded = (key: string) => {
     setExpandedIds((prev) => {
       const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
+      if (newSet.has(key)) {
+        newSet.delete(key);
       } else {
-        newSet.add(id);
+        newSet.add(key);
       }
       return newSet;
     });
@@ -140,9 +148,9 @@ function App() {
 
           <ul>
             {subs.map((s) => (
-              <li key={s.id}>
+              <li key={submissionUiKey(s)}>
                 {s.problem} - {s.verdict}
-                <button onClick={() => markAC(s.id)}>标为 AC</button>
+                <button onClick={() => markAC(s.platform, s.id)}>标为 AC</button>
               </li>
             ))}
           </ul>

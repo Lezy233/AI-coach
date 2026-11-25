@@ -3,6 +3,7 @@ import type { Submission } from "../domain/submission";
 import { createExportFilename, serializeSubmissions } from "./export";
 
 const submission: Submission = {
+  platform: "luogu",
   id: 246874350,
   score: 100,
   submitTime: new Date("2025-11-12T12:16:19.000Z"),
