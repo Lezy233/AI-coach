@@ -15,7 +15,31 @@ function makeSubmission(overrides: Partial<Submission>): Submission {
   };
 }
 
+function formatLocalDate(date: Date) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
 describe("computeStats", () => {
+  it("本地午夜两侧的记录归入不同日期", () => {
+    const localMidnight = new Date(2025, 0, 15);
+    const beforeMidnight = new Date(localMidnight.getTime() - 60_000);
+    const afterMidnight = new Date(localMidnight.getTime() + 60_000);
+
+    const submissions = [
+      makeSubmission({ id: 1, submitTime: beforeMidnight }),
+      makeSubmission({ id: 2, verdict: "AC", submitTime: afterMidnight }),
+    ];
+
+    expect(computeStats(submissions).byDay).toStrictEqual({
+      [formatLocalDate(beforeMidnight)]: 1,
+      [formatLocalDate(afterMidnight)]: 1,
+    });
+  });
+
   it("空提交记录返回全零统计", () => {
     expect(computeStats([])).toStrictEqual({
       total: 0,
@@ -66,27 +90,26 @@ describe("computeStats", () => {
     });
   });
 
-  it("按 UTC 日期分组提交数", () => {
+  it("按本地日期分组提交数", () => {
     const submissions = [
       makeSubmission({
         id: 1,
-        submitTime: new Date("2025-11-12T23:30:00.000Z"),
+        submitTime: new Date(2025, 10, 13, 8, 0),
       }),
       makeSubmission({
         id: 2,
         verdict: "AC",
-        submitTime: new Date("2025-11-13T00:30:00.000Z"),
+        submitTime: new Date(2025, 10, 13, 9, 0),
       }),
       makeSubmission({
         id: 3,
         verdict: "NAC",
-        submitTime: new Date("2025-11-13T01:00:00.000Z"),
+        submitTime: new Date(2025, 10, 13, 10, 0),
       }),
     ];
 
     expect(computeStats(submissions).byDay).toStrictEqual({
-      "2025-11-12": 1,
-      "2025-11-13": 2,
+      "2025-11-13": 3,
     });
   });
 
