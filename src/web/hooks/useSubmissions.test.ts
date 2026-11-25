@@ -17,7 +17,7 @@ vi.mock("react", () => ({
 
 vi.mock("../storage/db", () => ({
   db: {
-    submissionsByPlatform: {
+    submissions: {
       bulkGet,
       bulkPut,
       put,

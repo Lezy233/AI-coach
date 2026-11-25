@@ -13,7 +13,7 @@ function useSubmissions() {
   useEffect(() => {
     let cancelled = false; // cancelled 只防卸载不防覆盖
 
-    db.submissionsByPlatform.toArray().then((rows) => {
+    db.submissions.toArray().then((rows) => {
       if (!cancelled) {
         setSubs(rows);
       }
@@ -31,11 +31,11 @@ function useSubmissions() {
       keysBySerializedKey.set(JSON.stringify(key), key);
     }
     const keys = [...keysBySerializedKey.values()];
-    const existingRows = await db.submissionsByPlatform.bulkGet(keys);
+    const existingRows = await db.submissions.bulkGet(keys);
     const overwritten = existingRows.filter((row) => row !== undefined).length;
 
-    await db.submissionsByPlatform.bulkPut(batch);
-    const rows = await db.submissionsByPlatform.toArray();
+    await db.submissions.bulkPut(batch);
+    const rows = await db.submissions.toArray();
     setSubs(rows);
 
     return { imported: keys.length - overwritten, overwritten };
@@ -59,7 +59,7 @@ function useSubmissions() {
       return updatedSubmission;
     });
 
-    await db.submissionsByPlatform.bulkPut(updated);
+    await db.submissions.bulkPut(updated);
     setSubs(updated);
   }
 
