@@ -47,13 +47,13 @@ function useSubmissions() {
     verdict: Verdict,
   ) => {
     const updated = subs.map((submission) => {
-      if (submission.platform !== platform || submission.id !== targetID) {
+      if (submission.platform !== platform || submission.submitId !== targetID) {
         return submission;
       }
 
       const updatedSubmission = {
         ...submission,
-        verdict,
+        submitStatus: verdict,
       };
 
       return updatedSubmission;

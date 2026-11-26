@@ -10,7 +10,7 @@ export const LUOGU_PAGE_DELAY_MS = 300;
  * 不排除未来洛谷官方增加新状态码的风险
  */
 export const STATUS_TO_VERDICT: Partial<
-Record<number, Submission["verdict"]>
+Record<number, Submission["submitStatus"]>
 > = {
   2: "CE",
   3: "OLE",
@@ -23,7 +23,7 @@ Record<number, Submission["verdict"]>
   14: "NAC",
 };
 
-export const VERDICTS = new Set<Submission["verdict"]>([
+export const VERDICTS = new Set<Submission["submitStatus"]>([
   "CE",
   "OLE",
   "MLE",
@@ -45,5 +45,6 @@ export type RawLuoguRecord = {
   problem: {
     pid: string,
     name: string,
+    difficulty: number | null,
   };
 };

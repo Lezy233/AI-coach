@@ -63,7 +63,8 @@ function parseRecord(input: unknown): RawLuoguRecord {
     !isNullableObject(input.contest) ||                           // contest
 		!isObject(input.problem) || 																	// problem
 		typeof input.problem.pid !== "string" || input.problem.pid.length === 0 ||
-		typeof input.problem.name !== "string"
+		typeof input.problem.name !== "string" ||
+		!(input.problem.difficulty === null || isFiniteNumber(input.problem.difficulty))
 	) {
 		throw new Error("提交记录字段不符合预期");
 	}
@@ -77,25 +78,28 @@ function parseRecord(input: unknown): RawLuoguRecord {
 		problem: {
 			pid: input.problem.pid,
 			name: input.problem.name,
+			difficulty: input.problem.difficulty,
 		},
 	};
 }
 
 function toSubmission(input: RawLuoguRecord): Submission {
-	const verdict = STATUS_TO_VERDICT[input.status]; // 原始 status 转译
+	const submitStatus = STATUS_TO_VERDICT[input.status]; // 原始 status 转译
 
-	if (verdict === undefined) {
+	if (submitStatus === undefined) {
 		throw new Error(`未知的提交状态码: ${input.status}`);
 	}
 
 	return {
 		platform: "luogu",
-		id: input.id,
-		score: input.score,
+		submitId: input.id,
 		submitTime: new Date(input.submitTime * 1000),
-		contest: input.contest,
-		problem: input.problem.pid,
-		verdict,
+		submitStatus,
+		submitScore: input.score,
+		submitContest: input.contest,
+		problemId: input.problem.pid,
+		problemName: input.problem.name,
+		problemDifficulty: input.problem.difficulty,
 	};
 }
 

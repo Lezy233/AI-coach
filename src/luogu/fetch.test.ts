@@ -68,7 +68,7 @@ describe("fetchSubmissions page and collection validation", () => {
       onProgress,
     });
 
-    expect(submissions.map((submission) => submission.id)).toStrictEqual([
+    expect(submissions.map((submission) => submission.submitId)).toStrictEqual([
       record1.id,
       record2.id,
       record3.id,
@@ -91,7 +91,7 @@ describe("fetchSubmissions page and collection validation", () => {
       onProgress,
     });
 
-    expect(submissions.map((submission) => submission.id)).toStrictEqual([
+    expect(submissions.map((submission) => submission.submitId)).toStrictEqual([
       record1.id,
     ]);
     expect(fetchMock).toHaveBeenCalledTimes(1);

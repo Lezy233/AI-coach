@@ -89,12 +89,14 @@ pnpm lint             # 运行 ESLint
   "submissions": [
     {
       "platform": "luogu",
-      "id": 246874350,
-      "score": 100,
+      "submitId": 246874350,
       "submitTime": "2025-11-12T12:16:19.000Z",
-      "contest": null,
-      "problem": "T684525",
-      "verdict": "AC"
+      "submitStatus": "AC",
+      "submitScore": 100,
+      "submitContest": null,
+      "problemId": "T684525",
+      "problemName": "隔墙花影旧相知",
+      "problemDifficulty": 1
     }
   ]
 }
@@ -112,9 +114,9 @@ pnpm lint             # 运行 ESLint
 
 自动化测试应使用 `src/test/fixtures/` 中最小化、脱敏后的样本，不直接依赖完整个人导出文件。
 
-Web 站点中的 Dexie 数据库属于当前网站源；它与洛谷页面中的数据存储相互隔离，不会因为共用代码而自动同步。提交记录使用 `[platform+id]` 复合主键，不同平台的相同数值 ID 互不影响。
+Web 站点中的 Dexie 数据库属于当前网站源；它与洛谷页面中的数据存储相互隔离，不会因为共用代码而自动同步。提交记录使用 `[platform+submitId]` 复合主键，不同平台的相同数值提交 ID 互不影响。
 
-项目处于开发阶段，不提供旧数据库结构迁移；数据库结构变更后，需要清除一次网站源下的旧 `AppDatabase` IndexedDB 数据。
+项目处于开发阶段，不提供旧数据迁移；数据库结构或 `Submission` 字段变更后，需要清除一次网站源下的旧 `AppDatabase` IndexedDB 数据。
 
 ## 当前边界
 

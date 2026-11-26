@@ -18,12 +18,14 @@ function parseImportedSubmission(
 	}
 
 	if (
-    !isInteger(input.id) ||
-    !(input.score === null || isFiniteNumber(input.score)) ||
+    !isInteger(input.submitId) ||
+    !(input.submitScore === null || isFiniteNumber(input.submitScore)) ||
 		!isValidDateString(input.submitTime) ||
-    !(input.contest === null || isObject(input.contest)) ||
-		typeof input.problem !== "string" || input.problem.length === 0 ||
-		!isVerdict(input.verdict) ||
+    !(input.submitContest === null || isObject(input.submitContest)) ||
+		typeof input.problemId !== "string" || input.problemId.length === 0 ||
+		typeof input.problemName !== "string" || input.problemName.length === 0 ||
+		!(input.problemDifficulty === null || isFiniteNumber(input.problemDifficulty)) ||
+		!isVerdict(input.submitStatus) ||
 		(input.platform !== undefined && input.platform !== platform)
 	) {
 		throw new Error(`导入文件中的 submission[${index}] 字段不符合预期`);
@@ -31,12 +33,14 @@ function parseImportedSubmission(
 
 	return {
 		platform,
-		id: input.id,
-		score: input.score,
+		submitId: input.submitId,
 		submitTime: new Date(input.submitTime),
-		contest: input.contest,
-		problem: input.problem,
-		verdict: input.verdict,
+		submitStatus: input.submitStatus,
+		submitScore: input.submitScore,
+		submitContest: input.submitContest,
+		problemId: input.problemId,
+		problemName: input.problemName,
+		problemDifficulty: input.problemDifficulty,
 	}
 }
 

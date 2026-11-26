@@ -5,12 +5,14 @@ import { computeStats } from "./stats";
 function makeSubmission(overrides: Partial<Submission>): Submission {
   return {
     platform: "luogu",
-    id: 1,
-    score: null,
+    submitId: 1,
     submitTime: new Date("2025-01-01T00:00:00.000Z"),
-    contest: null,
-    problem: "P1",
-    verdict: "WA",
+    submitStatus: "WA",
+    submitScore: null,
+    submitContest: null,
+    problemId: "P1",
+    problemName: "测试题目",
+    problemDifficulty: null,
     ...overrides,
   };
 }
@@ -30,8 +32,8 @@ describe("computeStats", () => {
     const afterMidnight = new Date(localMidnight.getTime() + 60_000);
 
     const submissions = [
-      makeSubmission({ id: 1, submitTime: beforeMidnight }),
-      makeSubmission({ id: 2, verdict: "AC", submitTime: afterMidnight }),
+      makeSubmission({ submitId: 1, submitTime: beforeMidnight }),
+      makeSubmission({ submitId: 2, submitStatus: "AC", submitTime: afterMidnight }),
     ];
 
     expect(computeStats(submissions).byDay).toStrictEqual({
@@ -62,11 +64,11 @@ describe("computeStats", () => {
 
   it("统计总数、AC 数、通过率和各判定次数", () => {
     const submissions = [
-      makeSubmission({ id: 1, verdict: "AC" }),
-      makeSubmission({ id: 2, verdict: "AC" }),
-      makeSubmission({ id: 3, verdict: "NAC" }),
-      makeSubmission({ id: 4, verdict: "WA" }),
-      makeSubmission({ id: 5, verdict: "CE" }),
+      makeSubmission({ submitId: 1, submitStatus: "AC" }),
+      makeSubmission({ submitId: 2, submitStatus: "AC" }),
+      makeSubmission({ submitId: 3, submitStatus: "NAC" }),
+      makeSubmission({ submitId: 4, submitStatus: "WA" }),
+      makeSubmission({ submitId: 5, submitStatus: "CE" }),
     ];
 
     expect(computeStats(submissions)).toStrictEqual({
@@ -93,17 +95,17 @@ describe("computeStats", () => {
   it("按本地日期分组提交数", () => {
     const submissions = [
       makeSubmission({
-        id: 1,
+        submitId: 1,
         submitTime: new Date(2025, 10, 13, 8, 0),
       }),
       makeSubmission({
-        id: 2,
-        verdict: "AC",
+        submitId: 2,
+        submitStatus: "AC",
         submitTime: new Date(2025, 10, 13, 9, 0),
       }),
       makeSubmission({
-        id: 3,
-        verdict: "NAC",
+        submitId: 3,
+        submitStatus: "NAC",
         submitTime: new Date(2025, 10, 13, 10, 0),
       }),
     ];
@@ -115,8 +117,8 @@ describe("computeStats", () => {
 
   it("不把部分通过的 NAC 计入通过数", () => {
     const submissions = [
-      makeSubmission({ id: 1, verdict: "AC" }),
-      makeSubmission({ id: 2, verdict: "NAC" }),
+      makeSubmission({ submitId: 1, submitStatus: "AC" }),
+      makeSubmission({ submitId: 2, submitStatus: "NAC" }),
     ];
 
     expect(computeStats(submissions)).toMatchObject({

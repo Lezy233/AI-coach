@@ -55,8 +55,8 @@ const AnalysisBar = memo(function AnalysisBar() {
   )
 });
 
-function submissionUiKey({ platform, id }: Submission) {
-  return `${platform}:${id}`;
+function submissionUiKey({ platform, submitId }: Submission) {
+  return `${platform}:${submitId}`;
 }
 
 function SubmissionList({
@@ -72,12 +72,12 @@ function SubmissionList({
 }) {
   return (
     <ul>
-      {submission.filter((s) => s.verdict === verdict).map((s) => {
+      {submission.filter((s) => s.submitStatus === verdict).map((s) => {
         const key = submissionUiKey(s);
 
         return (
           <li key={key}>
-            {s.problem} - {s.verdict}
+            {s.problemId} - {s.submitStatus}
             <button onClick={() => onToggle(key)}>
               {expandedIds.has(key) ? "收起" : "展开"}
             </button>
@@ -151,8 +151,8 @@ function App() {
           <ul>
             {subs.map((s) => (
               <li key={submissionUiKey(s)}>
-                {s.problem} - {s.verdict}
-                <button onClick={() => markAC(s.platform, s.id)}>标为 AC</button>
+                {s.problemId} - {s.submitStatus}
+                <button onClick={() => markAC(s.platform, s.submitId)}>标为 AC</button>
               </li>
             ))}
           </ul>

@@ -27,7 +27,7 @@ export type SubmissionStats = {
 
 export function computeStats(submissions: Submission[]): SubmissionStats {
 	const total = submissions.length;
-	const accepted = submissions.filter((s) => s.verdict === "AC").length;
+	const accepted = submissions.filter((s) => s.submitStatus === "AC").length;
 	const acceptedRate = total === 0 ? 0 : accepted / total;
 
 	const byVerdict: Record<Verdict, number> = {
@@ -43,7 +43,7 @@ export function computeStats(submissions: Submission[]): SubmissionStats {
 	};
 
 	for (const submission of submissions) {
-		byVerdict[submission.verdict]++;
+		byVerdict[submission.submitStatus]++;
 	}
 
 	const byDay: Record<string, number> = {};

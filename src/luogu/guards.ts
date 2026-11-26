@@ -50,5 +50,5 @@ export function isValidDateString(value: unknown): value is string {
 }
 
 export function isVerdict(value: unknown): value is Verdict {
-	return typeof value === "string" && VERDICTS.has(value as Submission["verdict"]);
+	return typeof value === "string" && VERDICTS.has(value as Submission["submitStatus"]);
 }

@@ -16,21 +16,25 @@ describe("parseImportedSubmissions", () => {
     expect(submissions).toHaveLength(luogu10086.submissions.length);
     expect(submissions[0]).toStrictEqual({
       platform: "luogu",
-      id: 246901955,
-      score: 70,
+      submitId: 246901955,
       submitTime: new Date("2025-11-12T13:39:38.000Z"),
-      contest: null,
-      problem: "T684526",
-      verdict: "NAC",
+      submitStatus: "NAC",
+      submitScore: 70,
+      submitContest: null,
+      problemId: "T684526",
+      problemName: "T684526",
+      problemDifficulty: null,
     });
     expect(submissions.at(-1)).toStrictEqual({
       platform: "luogu",
-      id: 183860401,
-      score: 80,
+      submitId: 183860401,
       submitTime: new Date("2024-10-21T13:02:53.000Z"),
-      contest: null,
-      problem: "P1121",
-      verdict: "NAC",
+      submitStatus: "NAC",
+      submitScore: 80,
+      submitContest: null,
+      problemId: "P1121",
+      problemName: "P1121",
+      problemDifficulty: null,
     });
     expect(submissions.every(({ submitTime }) => submitTime instanceof Date))
       .toBe(true);

@@ -108,7 +108,7 @@ function expectedRowsForPage(page: number, meta: PageMeta): number {
 //   submissions: Submission[],
 // ): number {
 //   return submissions.reduce(
-//     (maxId, submission) => Math.max(maxId, submission.id),
+//     (maxId, submission) => Math.max(maxId, submission.submitId),
 //     0,
 //   );
 // }
@@ -224,7 +224,7 @@ export async function fetchSubmissions(
     }
 
     const freshSubmissions = submissions.filter(
-      (submission) => submission.id > knownMaxId,
+      (submission) => submission.submitId > knownMaxId,
     );
 
     allSubmissions.push(...freshSubmissions);
@@ -234,7 +234,7 @@ export async function fetchSubmissions(
     });
 
     const reachedKnownRecord =
-      submissions.some((submission) => submission.id <= knownMaxId);
+      submissions.some((submission) => submission.submitId <= knownMaxId);
 
     const totalPages = Math.ceil(meta.count / meta.perPage);
 
@@ -251,7 +251,7 @@ export async function fetchSubmissions(
 
   if (knownMaxId === 0 && expectedMeta !== undefined) {
     const uniqueIds = new Set(
-      allSubmissions.map((submission) => submission.id),
+      allSubmissions.map((submission) => submission.submitId),
     );
 
     if (uniqueIds.size !== expectedMeta.count) {
