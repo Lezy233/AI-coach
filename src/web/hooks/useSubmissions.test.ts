@@ -28,26 +28,32 @@ vi.mock("../storage/db", () => ({
 
 const batch: Submission[] = [
   {
-    platform: "luogu",
+    platform: "Luogu",
     submitId: 246901955,
     submitTime: new Date("2025-11-12T13:39:38.000Z"),
     submitStatus: "NAC",
     submitScore: 70,
     submitContest: null,
-    problemId: "T684526",
-    problemName: "伊波恩·弗塔根的抄本",
-    problemDifficulty: 3,
+    problem: {
+      platform: "Luogu",
+      id: "T684526",
+      name: "伊波恩·弗塔根的抄本",
+      difficulty: 3,
+    },
   },
   {
-    platform: "luogu",
+    platform: "Luogu",
     submitId: 246874350,
     submitTime: new Date("2025-11-12T12:16:19.000Z"),
     submitStatus: "AC",
     submitScore: 100,
     submitContest: null,
-    problemId: "T684525",
-    problemName: "隔墙花影旧相知",
-    problemDifficulty: 1,
+    problem: {
+      platform: "Luogu",
+      id: "T684525",
+      name: "隔墙花影旧相知",
+      difficulty: 1,
+    },
   },
 ];
 
@@ -66,8 +72,8 @@ describe("useSubmissions", () => {
     const result = await importSubmissions(batch);
 
     expect(bulkGet).toHaveBeenCalledWith([
-      ["luogu", 246901955],
-      ["luogu", 246874350],
+      ["Luogu", 246901955],
+      ["Luogu", 246874350],
     ]);
     expect(bulkPut).toHaveBeenCalledWith(batch);
     expect(put).not.toHaveBeenCalled();
@@ -88,7 +94,7 @@ describe("useSubmissions", () => {
   });
 
   it("treats equal IDs from different platforms as distinct submissions", async () => {
-    const otherPlatformSubmission = { ...batch[0], platform: "codeforces" };
+    const otherPlatformSubmission: Submission = { ...batch[0], platform: "Codeforces" };
     bulkGet.mockResolvedValue([undefined, undefined]);
     bulkPut.mockResolvedValue(undefined);
     toArray.mockResolvedValue([batch[0], otherPlatformSubmission]);
@@ -97,8 +103,8 @@ describe("useSubmissions", () => {
     const result = await importSubmissions([batch[0], otherPlatformSubmission]);
 
     expect(bulkGet).toHaveBeenCalledWith([
-      ["luogu", 246901955],
-      ["codeforces", 246901955],
+      ["Luogu", 246901955],
+      ["Codeforces", 246901955],
     ]);
     expect(result).toStrictEqual({ imported: 2, overwritten: 0 });
   });

@@ -77,7 +77,7 @@ function SubmissionList({
 
         return (
           <li key={key}>
-            {s.problemId} - {s.submitStatus}
+            {s.problem.id} - {s.submitStatus}
             <button onClick={() => onToggle(key)}>
               {expandedIds.has(key) ? "收起" : "展开"}
             </button>
@@ -151,7 +151,7 @@ function App() {
           <ul>
             {subs.map((s) => (
               <li key={submissionUiKey(s)}>
-                {s.problemId} - {s.submitStatus}
+                {s.problem.id} - {s.submitStatus}
                 <button onClick={() => markAC(s.platform, s.submitId)}>标为 AC</button>
               </li>
             ))}

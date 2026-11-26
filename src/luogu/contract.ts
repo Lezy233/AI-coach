@@ -1,4 +1,8 @@
+import type { Platform } from "../domain/platform";
 import type { Submission } from "../domain/submission";
+
+export const LUOGU_PLATFORM: Platform = "Luogu";
+export const LUOGU_SOURCE = "luogu";
 
 export const LUOGU_RECORD_LIST_PATH = "/record/list";
 export const LUOGU_CONTENT_ONLY_HEADER = "x-lentille-request";

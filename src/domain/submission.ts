@@ -1,3 +1,5 @@
+import type { Platform } from './platform';
+import type { Problem } from './problem';
 export type Verdict = "CE" | "OLE" | "MLE" | "TLE" | "WA" | "RE" | "UKE" | "AC" | "NAC";
 
 /*
@@ -15,18 +17,16 @@ Submission 数据结构示意图
             └─ difficulty
  */
 export type Submission = {
-  platform: string;
+  platform: Platform;
   submitId: number;
   submitTime: Date;
   submitStatus: Verdict;
   submitScore: number | null;
   submitContest: Record<string, unknown> | null;
-  problemId: string;
-  problemName: string;
-  problemDifficulty: number | null;
+  problem: Problem;
 };
 
-export type SubmissionKey = [platform: string, submitId: number];
+export type SubmissionKey = [platform: Platform, submitId: number];
 
 export function submissionKey({ platform, submitId }: Submission): SubmissionKey {
   return [platform, submitId];

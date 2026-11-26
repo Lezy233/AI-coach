@@ -1,5 +1,6 @@
 import type { Submission } from "../domain/submission";
 import {
+  LUOGU_PLATFORM,
   STATUS_TO_VERDICT,
   type RawLuoguRecord
 } from "./contract";
@@ -91,15 +92,18 @@ function toSubmission(input: RawLuoguRecord): Submission {
 	}
 
 	return {
-		platform: "luogu",
+		platform: LUOGU_PLATFORM,
 		submitId: input.id,
 		submitTime: new Date(input.submitTime * 1000),
 		submitStatus,
 		submitScore: input.score,
 		submitContest: input.contest,
-		problemId: input.problem.pid,
-		problemName: input.problem.name,
-		problemDifficulty: input.problem.difficulty,
+		problem: {
+			platform: LUOGU_PLATFORM,
+			id: input.problem.pid,
+			name: input.problem.name,
+			difficulty: input.problem.difficulty,
+		},
 	};
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { db } from '../storage/db'
+import type { Platform } from '../../domain/platform'
 import {
   submissionKey,
   type Submission,
@@ -42,7 +43,7 @@ function useSubmissions() {
   }
 
   const handleMarkVerdict = async (
-    platform: string,
+    platform: Platform,
     targetID: number,
     verdict: Verdict,
   ) => {
@@ -63,7 +64,7 @@ function useSubmissions() {
     setSubs(updated);
   }
 
-  const markAC = (platform: string, targetID: number) => {
+  const markAC = (platform: Platform, targetID: number) => {
     handleMarkVerdict(platform, targetID, "AC");
   };
 

@@ -10,34 +10,115 @@ import {
 } from "./import";
 
 describe("parseImportedSubmissions", () => {
-  it("解析浏览器拓展导出的完整 JSON", () => {
+  it("解析旧版扁平字段的导出 JSON，并归一为嵌套 problem", () => {
     const submissions = parseImportedSubmissions(luogu10086);
 
     expect(submissions).toHaveLength(luogu10086.submissions.length);
     expect(submissions[0]).toStrictEqual({
-      platform: "luogu",
+      platform: "Luogu",
       submitId: 246901955,
       submitTime: new Date("2025-11-12T13:39:38.000Z"),
       submitStatus: "NAC",
       submitScore: 70,
       submitContest: null,
-      problemId: "T684526",
-      problemName: "T684526",
-      problemDifficulty: null,
+      problem: {
+        platform: "Luogu",
+        id: "T684526",
+        name: "T684526",
+        difficulty: null,
+      },
     });
     expect(submissions.at(-1)).toStrictEqual({
-      platform: "luogu",
+      platform: "Luogu",
       submitId: 183860401,
       submitTime: new Date("2024-10-21T13:02:53.000Z"),
       submitStatus: "NAC",
       submitScore: 80,
       submitContest: null,
-      problemId: "P1121",
-      problemName: "P1121",
-      problemDifficulty: null,
+      problem: {
+        platform: "Luogu",
+        id: "P1121",
+        name: "P1121",
+        difficulty: null,
+      },
     });
     expect(submissions.every(({ submitTime }) => submitTime instanceof Date))
       .toBe(true);
+  });
+
+  it("解析新版嵌套 problem 的导出 JSON", () => {
+    const legacy = luogu10086.submissions[0];
+    const {
+      problemId,
+      problemName,
+      problemDifficulty,
+      ...rest
+    } = legacy;
+    const modern = {
+      ...rest,
+      platform: "Luogu",
+      problem: {
+        platform: "Luogu",
+        id: problemId,
+        name: problemName,
+        difficulty: problemDifficulty,
+      },
+    };
+
+    expect(parseImportedSubmissions({
+      ...luogu10086,
+      source: "Luogu",
+      submissions: [modern],
+    })).toStrictEqual([
+      {
+        platform: "Luogu",
+        submitId: 246901955,
+        submitTime: new Date("2025-11-12T13:39:38.000Z"),
+        submitStatus: "NAC",
+        submitScore: 70,
+        submitContest: null,
+        problem: {
+          platform: "Luogu",
+          id: "T684526",
+          name: "T684526",
+          difficulty: null,
+        },
+      },
+    ]);
+  });
+
+  it("解析更早版本导出中的字符串 problem 字段", () => {
+    expect(parseImportedSubmissions({
+      source: "luogu",
+      uid: 10086,
+      exportedAt: "2026-11-18T08:40:50.937Z",
+      submissions: [
+        {
+          platform: "luogu",
+          id: 246901955,
+          score: 70,
+          submitTime: "2025-11-12T13:39:38.000Z",
+          contest: null,
+          problem: "T684526",
+          verdict: "NAC",
+        },
+      ],
+    })).toStrictEqual([
+      {
+        platform: "Luogu",
+        submitId: 246901955,
+        submitTime: new Date("2025-11-12T13:39:38.000Z"),
+        submitStatus: "NAC",
+        submitScore: 70,
+        submitContest: null,
+        problem: {
+          platform: "Luogu",
+          id: "T684526",
+          name: "T684526",
+          difficulty: null,
+        },
+      },
+    ]);
   });
 
   it("也可以直接解析 JSON 文本", () => {

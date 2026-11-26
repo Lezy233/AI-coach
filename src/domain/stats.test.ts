@@ -4,15 +4,18 @@ import { computeStats } from "./stats";
 
 function makeSubmission(overrides: Partial<Submission>): Submission {
   return {
-    platform: "luogu",
+    platform: "Luogu",
     submitId: 1,
     submitTime: new Date("2025-01-01T00:00:00.000Z"),
     submitStatus: "WA",
     submitScore: null,
     submitContest: null,
-    problemId: "P1",
-    problemName: "测试题目",
-    problemDifficulty: null,
+    problem: {
+      platform: "Luogu",
+      id: "P1",
+      name: "测试题目",
+      difficulty: null,
+    },
     ...overrides,
   };
 }
