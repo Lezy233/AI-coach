@@ -88,19 +88,24 @@ pnpm lint             # 运行 ESLint
   "exportedAt": "2026-11-18T08:00:00.000Z",
   "submissions": [
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 246874350,
       "submitTime": "2025-11-12T12:16:19.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "T684525",
-      "problemName": "隔墙花影旧相知",
-      "problemDifficulty": 1
+      "problem": {
+        "platform": "Luogu",
+        "id": "T684525",
+        "name": "隔墙花影旧相知",
+        "difficulty": 1
+      }
     }
   ]
 }
 ```
+
+导入端兼容旧版导出中的 `problemId` / `problemName` / `problemDifficulty` 扁平字段，以及更早版本的 `problem` 字符串形式，并统一归一为新版嵌套 `problem` 结构。
 
 ## GitHub Pages
 
