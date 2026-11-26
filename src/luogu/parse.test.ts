@@ -184,7 +184,7 @@ describe("parseSubmissionsPage", () => {
     expect(parseSubmissionsPage(envelope(records))).toStrictEqual(expected);
   });
 
-  it("兼容数字索引对象，并按数值索引排序", () => {
+  it("支持数字索引对象，并按数值索引排序", () => {
     const result = { "10": record9, "2": record4, "0": record1 };
 
     const submissions = parseSubmissionsPage(envelope(result));

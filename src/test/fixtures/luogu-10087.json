@@ -4,181 +4,225 @@
   "exportedAt": "2026-11-18T08:40:50.937Z",
   "submissions": [
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 246901955,
       "submitTime": "2025-11-12T13:39:38.000Z",
       "submitStatus": "NAC",
       "submitScore": 70,
-      "submitContest": null,
-      "problemDifficulty": null
+      "submitContest": null
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 246900232,
       "submitTime": "2025-11-12T13:33:23.000Z",
       "submitStatus": "NAC",
       "submitScore": 70,
       "submitContest": null,
-      "problemId": "T684526",
-      "problemName": "T684526",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "T684526",
+        "name": "T684526",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 246874350,
       "submitTime": "2025-11-12T12:16:19.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "T684525",
-      "problemName": "T684525",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "T684525",
+        "name": "T684525",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 246874063,
       "submitTime": "2025-11-12T12:15:42.000Z",
       "submitStatus": "NAC",
       "submitScore": 95,
       "submitContest": null,
-      "problemId": "T684525",
-      "problemName": "T684525",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "T684525",
+        "name": "T684525",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 246865284,
       "submitTime": "2025-11-12T11:53:10.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "T684524",
-      "problemName": "T684524",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "T684524",
+        "name": "T684524",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 212342039,
       "submitTime": "2025-04-06T14:41:08.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P12015",
-      "problemName": "P12015",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P12015",
+        "name": "P12015",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 212340237,
       "submitTime": "2025-04-06T14:26:51.000Z",
       "submitStatus": "NAC",
       "submitScore": 20,
       "submitContest": null,
-      "problemId": "P12015",
-      "problemName": "P12015",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P12015",
+        "name": "P12015",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 205384591,
       "submitTime": "2025-03-01T09:59:30.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P5738",
-      "problemName": "P5738",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P5738",
+        "name": "P5738",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 191527648,
       "submitTime": "2024-11-27T13:32:38.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P8435",
-      "problemName": "P8435",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P8435",
+        "name": "P8435",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 191524966,
       "submitTime": "2024-11-27T13:25:04.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P8435",
-      "problemName": "P8435",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P8435",
+        "name": "P8435",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 191524634,
       "submitTime": "2024-11-27T13:24:04.000Z",
       "submitStatus": "CE",
       "submitScore": null,
       "submitContest": null,
-      "problemId": "P8435",
-      "problemName": "P8435",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P8435",
+        "name": "P8435",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 191524566,
       "submitTime": "2024-11-27T13:23:54.000Z",
       "submitStatus": "CE",
       "submitScore": null,
       "submitContest": null,
-      "problemId": "P8435",
-      "problemName": "P8435",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P8435",
+        "name": "P8435",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 190091498,
       "submitTime": "2024-11-20T19:19:58.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P10267",
-      "problemName": "P10267",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P10267",
+        "name": "P10267",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 190091491,
       "submitTime": "2024-11-20T19:17:12.000Z",
       "submitStatus": "NAC",
       "submitScore": 30,
       "submitContest": null,
-      "problemId": "P10267",
-      "problemName": "P10267",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P10267",
+        "name": "P10267",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 190091484,
       "submitTime": "2024-11-20T19:14:19.000Z",
       "submitStatus": "NAC",
       "submitScore": 30,
       "submitContest": null,
-      "problemId": "P10267",
-      "problemName": "P10267",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P10267",
+        "name": "P10267",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 190091415,
       "submitTime": "2024-11-20T18:47:45.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P10264",
-      "problemName": "P10264",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P10264",
+        "name": "P10264",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 188644580,
       "submitTime": "2024-11-14T04:34:25.000Z",
       "submitStatus": "AC",
@@ -189,12 +233,15 @@
         "endTime": 1736780400,
         "name": "NOV13"
       },
-      "problemId": "U501270",
-      "problemName": "U501270",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "U501270",
+        "name": "U501270",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 188644450,
       "submitTime": "2024-11-14T04:32:50.000Z",
       "submitStatus": "NAC",
@@ -205,12 +252,15 @@
         "endTime": 1736780400,
         "name": "NOV13"
       },
-      "problemId": "U501270",
-      "problemName": "U501270",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "U501270",
+        "name": "U501270",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 188644339,
       "submitTime": "2024-11-14T04:31:33.000Z",
       "submitStatus": "NAC",
@@ -221,12 +271,15 @@
         "endTime": 1736780400,
         "name": "NOV13"
       },
-      "problemId": "U501270",
-      "problemName": "U501270",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "U501270",
+        "name": "U501270",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 188643720,
       "submitTime": "2024-11-14T04:23:09.000Z",
       "submitStatus": "AC",
@@ -237,12 +290,15 @@
         "endTime": 1736780400,
         "name": "NOV13"
       },
-      "problemId": "U501267",
-      "problemName": "U501267",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "U501267",
+        "name": "U501267",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 188643449,
       "submitTime": "2024-11-14T04:19:05.000Z",
       "submitStatus": "AC",
@@ -253,12 +309,15 @@
         "endTime": 1736780400,
         "name": "NOV13"
       },
-      "problemId": "U500976",
-      "problemName": "U500976",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "U500976",
+        "name": "U500976",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 188643204,
       "submitTime": "2024-11-14T04:15:21.000Z",
       "submitStatus": "AC",
@@ -269,207 +328,264 @@
         "endTime": 1736780400,
         "name": "NOV13"
       },
-      "problemId": "B2125",
-      "problemName": "B2125",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "B2125",
+        "name": "B2125",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 188216630,
       "submitTime": "2024-11-11T13:28:03.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P8681",
-      "problemName": "P8681",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P8681",
+        "name": "P8681",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 187385785,
       "submitTime": "2024-11-08T02:08:11.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P8647",
-      "problemName": "P8647",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P8647",
+        "name": "P8647",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 186873391,
       "submitTime": "2024-11-05T02:46:32.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P1156",
-      "problemName": "P1156",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1156",
+        "name": "P1156",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 186873072,
       "submitTime": "2024-11-05T02:43:54.000Z",
       "submitStatus": "NAC",
       "submitScore": 55,
       "submitContest": null,
-      "problemId": "P1156",
-      "problemName": "P1156",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1156",
+        "name": "P1156",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 186871876,
       "submitTime": "2024-11-05T02:33:04.000Z",
       "submitStatus": "NAC",
       "submitScore": 55,
       "submitContest": null,
-      "problemId": "P1156",
-      "problemName": "P1156",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1156",
+        "name": "P1156",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 186871333,
       "submitTime": "2024-11-05T02:27:53.000Z",
       "submitStatus": "NAC",
       "submitScore": 0,
       "submitContest": null,
-      "problemId": "P1156",
-      "problemName": "P1156",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1156",
+        "name": "P1156",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 186871224,
       "submitTime": "2024-11-05T02:26:49.000Z",
       "submitStatus": "NAC",
       "submitScore": 0,
       "submitContest": null,
-      "problemId": "P1156",
-      "problemName": "P1156",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1156",
+        "name": "P1156",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 186871042,
       "submitTime": "2024-11-05T02:25:08.000Z",
       "submitStatus": "NAC",
       "submitScore": 0,
       "submitContest": null,
-      "problemId": "P1156",
-      "problemName": "P1156",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1156",
+        "name": "P1156",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 186870315,
       "submitTime": "2024-11-05T02:19:10.000Z",
       "submitStatus": "NAC",
       "submitScore": 1,
       "submitContest": null,
-      "problemId": "P1156",
-      "problemName": "P1156",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1156",
+        "name": "P1156",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 184146973,
       "submitTime": "2024-10-22T18:24:25.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P1186",
-      "problemName": "P1186",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1186",
+        "name": "P1186",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 184146933,
       "submitTime": "2024-10-22T18:17:33.000Z",
       "submitStatus": "NAC",
       "submitScore": 71,
       "submitContest": null,
-      "problemId": "P1186",
-      "problemName": "P1186",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1186",
+        "name": "P1186",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 184146924,
       "submitTime": "2024-10-22T18:16:26.000Z",
       "submitStatus": "NAC",
       "submitScore": 71,
       "submitContest": null,
-      "problemId": "P1186",
-      "problemName": "P1186",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1186",
+        "name": "P1186",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 184146888,
       "submitTime": "2024-10-22T18:10:23.000Z",
       "submitStatus": "NAC",
       "submitScore": 72,
       "submitContest": null,
-      "problemId": "P1186",
-      "problemName": "P1186",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1186",
+        "name": "P1186",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 184146731,
       "submitTime": "2024-10-22T17:49:15.000Z",
       "submitStatus": "NAC",
       "submitScore": 61,
       "submitContest": null,
-      "problemId": "P1186",
-      "problemName": "P1186",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1186",
+        "name": "P1186",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 183867248,
       "submitTime": "2024-10-21T13:17:26.000Z",
       "submitStatus": "AC",
       "submitScore": 100,
       "submitContest": null,
-      "problemId": "P1121",
-      "problemName": "P1121",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1121",
+        "name": "P1121",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 183866879,
       "submitTime": "2024-10-21T13:16:35.000Z",
       "submitStatus": "NAC",
       "submitScore": 80,
       "submitContest": null,
-      "problemId": "P1121",
-      "problemName": "P1121",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1121",
+        "name": "P1121",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 183862200,
       "submitTime": "2024-10-21T13:06:43.000Z",
       "submitStatus": "NAC",
       "submitScore": 80,
       "submitContest": null,
-      "problemId": "P1121",
-      "problemName": "P1121",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1121",
+        "name": "P1121",
+        "difficulty": null
+      }
     },
     {
-      "platform": "luogu",
+      "platform": "Luogu",
       "submitId": 183860401,
       "submitTime": "2024-10-21T13:02:53.000Z",
       "submitStatus": "NAC",
       "submitScore": 80,
       "submitContest": null,
-      "problemId": "P1121",
-      "problemName": "P1121",
-      "problemDifficulty": null
+      "problem": {
+        "platform": "Luogu",
+        "id": "P1121",
+        "name": "P1121",
+        "difficulty": null
+      }
     }
   ]
 }

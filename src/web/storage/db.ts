@@ -17,9 +17,6 @@ class AppDatabase extends Dexie {
 		super('AppDatabase');
 		this.version(1).stores({
 			submissions: '[platform+submitId]',
-		});
-		this.version(2).stores({
-			submissions: '[platform+submitId]',
 			analysisLog: '++id, createdAt',
 		});
 	}

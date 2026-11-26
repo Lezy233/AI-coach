@@ -105,8 +105,6 @@ pnpm lint             # 运行 ESLint
 }
 ```
 
-导入端兼容旧版导出中的 `problemId` / `problemName` / `problemDifficulty` 扁平字段，以及更早版本的 `problem` 字符串形式，并统一归一为新版嵌套 `problem` 结构。
-
 ## GitHub Pages
 
 静态站点使用相对资源路径（`base: './'`），可部署到用户站点或项目站点子路径。执行 `pnpm build` 后，将 `dist/` 发布到 GitHub Pages 即可；可以通过 GitHub Actions 或 Pages 的 branch 发布方式完成部署。
