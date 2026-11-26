@@ -20,7 +20,7 @@ export type Submission = {
   platform: Platform;
   submitId: number;
   submitTime: Date;
-  submitStatus: Verdict;
+  submitStatus: Verdict; // 提交状态
   submitScore: number | null;
   submitContest: Record<string, unknown> | null;
   problem: Problem;
