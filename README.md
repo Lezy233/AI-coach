@@ -34,6 +34,8 @@
 - 页面组件：`src/web/App.tsx`
 - 本地数据库：`src/web/storage/db.ts`
 - 提交记录 Hook：`src/web/hooks/useSubmissions.tsx`
+- AI 配置面板：`src/web/SettingsPanel.tsx`（DeepSeek / 智谱 GLM 两家，配置以 JSON 存入 localStorage）
+- 厂商与模型清单：`src/web/ai-providers.ts`
 - 构建配置：`vite.config.ts`
 - 构建产物：`dist/`
 
@@ -124,5 +126,19 @@ Web 站点中的 Dexie 数据库属于当前网站源；它与洛谷页面中的
 ## 当前边界
 
 - 目前仅实现洛谷提交列表抓取，不包含题目详情或源代码抓取。
-- AI 模型调用、分析结果展示和 GitHub Pages 部署流程尚未实现。
+- AI 分析只支持 DeepSeek 与智谱 GLM 两家 OpenAI 兼容接口。
+- GitHub Pages 部署流程尚未实现。
 - 洛谷接口没有稳定的公开 SLA，接口字段或访问策略变化可能需要同步更新解析层。
+
+## 浏览器直连 AI 厂商的限制
+
+静态站点直接从前端调用厂商 API，受浏览器 CORS 约束。当前支持的两家实测结果：
+
+| 厂商 | 模型列表 `/models` | 对话 `/chat/completions` | 说明 |
+| --- | --- | --- | --- |
+| DeepSeek | ✅ | ✅ | 可完整直连 |
+| 智谱 GLM | ✅ | ❌ | 对话接口跨域预检不返回 `Access-Control-Allow-Origin`，直连必然 `Failed to fetch` |
+
+因此配置面板的「测试连接」用 `GET /models` 验证 Key 与网络，不发送对话请求；智谱要真正生成分析，需要把 Base URL 指向自建代理（例如 AI Selector 仓库里的 `backend/server.py`）。
+
+智谱免费的 flash 系列（如 `glm-4-flash`）不会出现在 `/models` 返回里，但可以正常调用，因此模型清单在 `src/web/ai-providers.ts` 中静态维护。
