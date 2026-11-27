@@ -116,9 +116,14 @@ export async function requestAnalysis(
 		requestBody.max_tokens = options.maxTokens;
 	}
 
-	const response = await fetch(
-		buildChatCompletionsUrl(options.baseUrl ?? DEFAULT_DEEPSEEK_BASE_URL),
-		{
+	const endpoint = buildChatCompletionsUrl(
+		options.baseUrl ?? DEFAULT_DEEPSEEK_BASE_URL,
+	);
+
+	let response: Response;
+
+	try {
+		response = await fetch(endpoint, {
 			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${options.apiKey}`,
@@ -126,8 +131,17 @@ export async function requestAnalysis(
 			},
 			body: JSON.stringify(requestBody),
 			signal: options.signal,
-		},
-	);
+		});
+	} catch (error) {
+		if (error instanceof TypeError) {
+			throw new Error(
+				`无法直连 ${endpoint.origin}：浏览器跨域（CORS）被拦截或网络不可达，请改用支持浏览器直连的厂商或配置代理。`,
+				{ cause: error },
+			);
+		}
+
+		throw error;
+	}
 
 	let body: unknown;
 	let isJson = true;

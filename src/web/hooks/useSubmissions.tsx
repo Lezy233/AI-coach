@@ -42,6 +42,7 @@ function useSubmissions() {
     return { imported: keys.length - overwritten, overwritten };
   }
 
+  // TODO: delete
   const handleMarkVerdict = async (
     platform: Platform,
     targetID: number,
@@ -64,6 +65,7 @@ function useSubmissions() {
     setSubs(updated);
   }
 
+  // TODO: delete
   const markAC = (platform: Platform, targetID: number) => {
     handleMarkVerdict(platform, targetID, "AC");
   };

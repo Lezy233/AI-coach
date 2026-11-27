@@ -1,38 +1,23 @@
 import { useCallback, useMemo, useState } from 'react';
+import { loadAIConfig, saveAIConfig, type AIConfig } from './ai-providers';
 import { SettingsContext } from './Settings'
-
-const API_KEY_STORAGE = "apiKey";
-const MODEL_STORAGE = "model";
 
 export function SettingsProvider({
 	children,
 }: {
 	children: React.ReactNode
 }) {
-	const [apiKey, setApiKeyState] = useState(
-		() => localStorage.getItem(API_KEY_STORAGE) ?? ""
-	);
-	const [model, setModelState] = useState(
-		() => localStorage.getItem(MODEL_STORAGE) ?? "gpt-3.5-turbo"
-	);
+	// 配置以 JSON 形式保存在本机 localStorage，首次渲染时读取一次。
+	const [settings, setSettings] = useState<AIConfig>(loadAIConfig);
 
-	const setApiKey = useCallback((value: string) => {
-		setApiKeyState(value);
-		localStorage.setItem(API_KEY_STORAGE, value);
-	}, []);
-
-	const setModel = useCallback((value: string) => {
-		setModelState(value);
-		localStorage.setItem(MODEL_STORAGE, value);
+	const saveConfig = useCallback((config: AIConfig) => {
+		saveAIConfig(config);
+		setSettings(config);
 	}, []);
 
 	const value = useMemo(
-		() => ({
-			settings: { apiKey, model },
-			setApiKey,
-			setModel,
-		}),
-		[apiKey, model, setApiKey, setModel]
+		() => ({ settings, saveConfig }),
+		[settings, saveConfig],
 	);
 
 	return (

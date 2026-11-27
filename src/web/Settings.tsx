@@ -1,14 +1,9 @@
 import { createContext } from 'react';
+import type { AIConfig } from './ai-providers';
 
-type Settings = {
-	apiKey: string;
-	model: string;
-};
-
-type SettingsContextValue = {
-  settings: Settings;
-  setApiKey: (apiKey: string) => void;
-  setModel: (model: string) => void;
+export type SettingsContextValue = {
+  settings: AIConfig;
+  saveConfig: (config: AIConfig) => void;
 };
 
 export const SettingsContext = createContext<SettingsContextValue | null>(null);
