@@ -13,7 +13,7 @@ class AppDatabase extends Dexie {
 	submissions!: Table<Submission, SubmissionKey>;
 	analysisLog!: Table<AnalysisLogEntry, number>;
 
-	constructor() {
+	constructor() { // 投入生产环境前每次修改无须考虑兼容性，直接弃库
 		super('AppDatabase');
 		this.version(1).stores({
 			submissions: '[platform+submitId]',

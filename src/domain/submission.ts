@@ -9,7 +9,7 @@ Submission 数据结构示意图
         ├─ id
         ├─ time
         ├─ score
-        ├─ status
+        ├─ status  // 提交结果（与平台原始 status 含义不同）
         ├─ contest // 是否在比赛中提交
         └─ problem // 提交题目
             ├─ id
@@ -20,7 +20,7 @@ export type Submission = {
   platform: Platform;
   submitId: number;
   submitTime: Date;
-  submitStatus: Verdict; // 提交状态
+  submitStatus: Verdict;
   submitScore: number | null;
   submitContest: Record<string, unknown> | null;
   problem: Problem;
