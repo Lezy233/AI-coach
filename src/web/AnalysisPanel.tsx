@@ -15,6 +15,7 @@ import {
   getProblemUrl,
   summarizeAnalysisInput,
 } from './analysis-log'
+import { computeAnalysisFingerprint } from './analysis-fingerprint'
 
 type AnalysisStatus = 'idle' | 'busy' | 'success' | 'error'
 
@@ -178,6 +179,18 @@ export function AnalysisPanel() {
         .reverse()
         .first()
 
+      // 输入指纹一致说明提交快照与模型配置都没变，直接复用已有结果，不再调用模型。
+      const inputHash = await computeAnalysisFingerprint({
+        submissions,
+        config: settings,
+      })
+
+      if (previousLog?.inputHash === inputHash) {
+        setStatus('success')
+        setMessage('输入未变化，已直接展示上次的分析结果（未重复调用模型）。')
+        return
+      }
+
       setMessage('正在生成分析，请稍候…')
 
       const content = await requestAnalysis(
@@ -196,6 +209,7 @@ export function AnalysisPanel() {
         createdAt: new Date(),
         result,
         inputSummary: summarizeAnalysisInput(submissions),
+        inputHash,
       }
 
       await db.analysisLog.add(entry)

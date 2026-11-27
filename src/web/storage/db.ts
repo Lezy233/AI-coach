@@ -7,6 +7,8 @@ export type AnalysisLogEntry = {
 	createdAt: Date;
 	result: AnalysisResult;
 	inputSummary: string;
+	/** 生成这条结果时的输入指纹（提交快照 + 模型配置），用于跳过重复分析 */
+	inputHash: string;
 };
 
 class AppDatabase extends Dexie {
